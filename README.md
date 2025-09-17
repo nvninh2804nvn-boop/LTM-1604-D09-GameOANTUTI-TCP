@@ -1,4 +1,4 @@
-<h2 align="center">
+h2 align="center">
     <a href="https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin">
     🎓 Khoa Công nghệ Thông tin – Trường Đại học Đại Nam
     </a>
@@ -8,73 +8,62 @@
    🕹️ GAME OẲN TÙ TÌ ONLINE (TCP SOCKET + JAVA SWING)
 </h2>
 
-<div align="center">
-    <p align="center">
-        <img src="assets/logo_aiotlab.png" alt="AIoTLab Logo" width="160"/>
-        <img src="assets/logo_fit.png" alt="FIT DNU Logo" width="160"/>
-        <img src="assets/logo_dnu.png" alt="DaiNam University Logo" width="200"/>
-    </p>
-
-[![AIoTLab](https://img.shields.io/badge/AIoTLab-green?style=for-the-badge)](https://www.facebook.com/DNUAIoTLab)
-[![Faculty of Information Technology](https://img.shields.io/badge/FIT-DaiNam-blue?style=for-the-badge)](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)
-[![University](https://img.shields.io/badge/DaiNam%20University-orange?style=for-the-badge)](https://dainam.edu.vn)
-
-</div>
-
 ---
 
 ## 📘 1. Giới thiệu  
 
-Hệ thống được xây dựng nhằm mô phỏng **trò chơi Oẳn Tù Tì (Rock – Paper – Scissors)** giữa hai người chơi thông qua **Java TCP Socket**.  
+Hệ thống mô phỏng **trò chơi Oẳn Tù Tì (Rock – Paper – Scissors)** giữa 2 người chơi thông qua **Java TCP Socket**.  
 
 ### Thành phần:
-- **Máy chủ (Server)** 🖥️  
-   - Quản lý tài khoản, kết nối, ghép cặp.  
-   - Xử lý trận đấu, lưu lịch sử, bảng xếp hạng.  
+- **Server (máy chủ)** 🖥️  
+   - Quản lý tài khoản, kết nối, ghép cặp, xử lý trận đấu.  
+   - Lưu lịch sử & bảng xếp hạng.  
 
-- **Máy khách (Client)** 💻  
-   - Giao diện Swing trực quan, thân thiện.  
-   - Đăng ký / đăng nhập, chơi game, xem lịch sử, thoát phòng.  
+- **Client (máy khách)** 💻  
+   - Giao diện Swing.  
+   - Đăng ký / đăng nhập, chơi, xem lịch sử, thoát phòng.  
 
-👉 **Ưu điểm nổi bật**  
-✅ Kết nối TCP ổn định  
-✅ Giao diện đẹp, có emoji ✊✋✌  
-✅ Lưu lịch sử và bảng xếp hạng thực tế  
-✅ Hỗ trợ thoát phòng an toàn  
+👉 **Ưu điểm:**  
+✅ Giao tiếp TCP ổn định  
+✅ Giao diện dễ dùng, trực quan với emoji ✊✋✌  
+✅ Lưu lịch sử (CSV) & bảng xếp hạng  
+✅ Có thoát phòng an toàn  
 
 ---
 
 ## 🛠 2. Công nghệ sử dụng  
 
-- **Ngôn ngữ:** Java (JDK 17+ / JDK 21)  
+- **Ngôn ngữ:** Java (JDK 17+ hoặc JDK 21)  
 - **Giao diện:** Java Swing  
 - **Kết nối:** TCP Socket  
 - **Lưu trữ:** File txt, csv  
-- **IDE khuyến nghị:** Eclipse IDE  
+- **IDE:** Eclipse IDE  
 
 ---
 
 ## 📸 3. Ảnh giao diện  
 
+> ⚠️ Đặt ảnh trong thư mục `LTM/assets/` rồi mới hiện được nhé  
+
 ### 🔑 Đăng nhập  
-<img src="assets/login.png" alt="Giao diện đăng nhập" width="600"/>
+![Đăng nhập](LTM/assets/login.png)
 
 ### 🎮 Chơi game  
-<img src="assets/game.png" alt="Giao diện chơi game" width="600"/>
+![Chơi game](LTM/assets/game.png)
 
 ### 📂 Lịch sử  
-<img src="assets/history.png" alt="Lịch sử trận đấu" width="600"/>
+![Lịch sử](LTM/assets/history.png)
 
 ### 🏆 Bảng xếp hạng  
-<img src="assets/leaderboard.png" alt="Bảng xếp hạng" width="600"/>
+![Bảng xếp hạng](LTM/assets/leaderboard.png)
 
 ---
 
 ## 🚀 4. Cài đặt & chạy  
 
-1. **Cài đặt môi trường**  
+1. **Cài môi trường**  
    - JDK 17+ (hoặc JDK 21).  
-   - IDE: Eclipse / IntelliJ / NetBeans.  
+   - Eclipse IDE.  
 
 2. **Clone project**  
    ```bash
@@ -82,58 +71,54 @@ Hệ thống được xây dựng nhằm mô phỏng **trò chơi Oẳn Tù Tì 
    cd LTM-1604-D09-Game-TCP
 Chạy chương trình
 
-Server: may_chu/UngDungMayChu.java
+Server: LTM/src/server/AppServer.java
 
-Client: khach_hang/UngDungKhach.java (mở 2 client để test).
+Client: LTM/src/client/ClientApp.java (mở 2 client để test).
 
-Dữ liệu
+File dữ liệu
 
-Tài khoản: db/taikhoan.txt
+Tài khoản: LTM/db/accounts.txt
 
-Lịch sử: db/lichsu.csv
+Lịch sử: LTM/db/history.csv
 
 📂 5. Cấu trúc thư mục
 📦 LTM
 
-khach_hang/ (code phía client)
+src/
 
-UngDungKhach.java – chạy client (main)
+client/
 
-GiaoDienTroChoi.java – giao diện Swing
+ClientApp.java – chạy client
 
-KetNoiKhach.java – xử lý kết nối TCP
+GameUI.java – giao diện Swing
 
-TienIch.java – tiện ích (hash mật khẩu)
+ClientConnection.java – xử lý kết nối TCP
 
-may_chu/ (code phía server)
+Utils.java – tiện ích (hash mật khẩu)
 
-UngDungMayChu.java – chạy server (main)
+server/
 
-XuLyKhach.java – xử lý kết nối client
+AppServer.java – chạy server
 
-QuanLyTroChoi.java – quản lý logic game
+ClientHandler.java – xử lý kết nối client
 
-XuLyLuotChoi.java – xử lý luật oẳn tù tì
+GameLogic.java – luật Oẳn Tù Tì
 
-QuanLyTaiKhoan.java – quản lý tài khoản
+AccountManager.java – quản lý tài khoản
 
-QuanLyLichSu.java – quản lý lịch sử & leaderboard
+HistoryManager.java – quản lý lịch sử + leaderboard
 
-db/ (lưu trữ dữ liệu)
+GameManager.java – quản lý logic game (nếu có)
 
-taikhoan.txt – lưu tài khoản (username:hash)
+db/
 
-lichsu.csv – lưu lịch sử trận đấu
+accounts.txt – lưu tài khoản
 
-assets/ (ảnh README)
+history.csv – lưu lịch sử
 
-login.png
+assets/ (chứa ảnh README)
 
-game.png
-
-history.png
-
-leaderboard.png
+login.png, game.png, history.png, leaderboard.png
 
 README.md – mô tả project
 
@@ -142,20 +127,17 @@ README.md – mô tả project
 
 👫 Ghép cặp tự động giữa 2 người chơi.
 
-✊✋✌ Oẳn Tù Tì trực quan (emoji + màu sắc).
+✊✋✌ Oẳn Tù Tì với emoji + màu sắc.
 
-📜 Lưu lịch sử đầy đủ (CSV).
+📜 Lưu lịch sử trận đấu.
 
-🏆 Bảng xếp hạng dựa trên kết quả thực tế.
+🏆 Bảng xếp hạng dựa trên lịch sử.
 
-🚪 Thoát phòng an toàn.
+🚪 Thoát phòng.
 
 ✍️ 7. Thông tin
-Sinh viên thực hiện: Nguyễn Việt Ninh – CNTT 16-04
+Sinh viên: Nguyễn Việt Ninh – CNTT 16-04
 
 Môn học: Lập trình mạng (LTM)
 
 Trường: Đại học Đại Nam
-
-yaml
-Copy code
