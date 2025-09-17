@@ -59,43 +59,50 @@
 
 ---
 
-## ⚙️ 4. Các bước cài đặt
-1. Cài đặt **JDK 17+ hoặc JDK 21**.  
-2. Cài **IDE** (Eclipse / IntelliJ / NetBeans).  
-3. Clone project:
-   ```bash
-   git clone https://github.com/nhinhnhinh/LTM-1604-D09-Game-TCP.git
-   cd LTM-1604-D09-Game-TCP
-Chạy:
+> ## ⚙️ Cài đặt
+> 1. Cài đặt **JDK 17+ hoặc JDK 21**  
+> 2. Cài **IDE** (Eclipse / IntelliJ / NetBeans)  
+> 3. Clone project:
+>    ```bash
+>    git clone https://github.com/nvninh2804nvn-boop/LTM-1604-D09-Game-TCP.git
+>    cd LTM-1604-D09-Game-TCP
+>    ```
+> 4. Chạy chương trình:
+>    - **Server**: `LTM/src/may_chu/AppServer.java`  
+>    - **Client**: `LTM/src/nguoi_choi/ClientApp.java` (mở 2 client để test)  
 
-Server: LTM/src/may_chu/AppServer.java
+---
 
-Client: LTM/src/nguoi_choi/ClientApp.java (chạy 2 client để test).
+> ## 📂 Cấu trúc thư mục
+> ```
+> 📦 LTM
+> ┣ 📂 bin
+> ┣ 📂 db
+> ┣ 📂 src
+> ┃ ┣ 📂 assets
+> ┃ ┃ ┣ aiotlab_logo.png
+> ┃ ┃ ┣ dnu_logo.png
+> ┃ ┃ ┣ fitdnu_logo.png
+> ┃ ┃ ┣ login.png.png
+> ┃ ┃ ┣ game.png.png
+> ┃ ┃ ┣ history.png.png
+> ┃ ┃ ┗ leaderboard.png.png
+> ┃ ┣ 📂 may_chu
+> ┃ ┗ 📂 nguoi_choi
+> ┣ accounts.txt
+> ┗ README.md
+> ```
 
-📂 5. Cấu trúc thư mục
-css
-Copy code
-📦 LTM
- ┣ 📂 bin
- ┣ 📂 db
- ┣ 📂 src
- ┃ ┣ 📂 assets
- ┃ ┃ ┣ aiotlab_logo.png
- ┃ ┃ ┣ dnu_logo.png
- ┃ ┃ ┣ fitdnu_logo.png
- ┃ ┃ ┣ login.png.png
- ┃ ┃ ┣ game.png.png
- ┃ ┃ ┣ history.png.png
- ┃ ┃ ┗ leaderboard.png.png
- ┃ ┣ 📂 may_chu
- ┃ ┗ 📂 nguoi_choi
- ┣ accounts.txt
- ┗ README.md
-📬 6. Liên hệ
-👤 Sinh viên thực hiện: Nguyễn Việt Ninh
-🎓 Khoa: Công nghệ Thông tin – Đại học Đại Nam
-🌐 Website Khoa CNTT – DNU
-📧 Email: nvninh2804@gmail.com
-📱 Fanpage: AIoTLab – FIT DNU
+---
 
-<p align="center"> <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam Logo" width="200"/> </p> ```
+> ## 📬 Liên hệ
+> 👤 **Sinh viên thực hiện**: Nguyễn Việt Ninh  
+> 🎓 **Khoa**: Công nghệ Thông tin – Đại học Đại Nam  
+> 🌐 [Website Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
+> 📧 Email: **nvninh2804@gmail.com**  
+> 📱 Fanpage: **AIoTLab – FIT DNU**  
+>
+> <p align="center">
+>   <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam Logo" width="200"/>
+> </p>
+
