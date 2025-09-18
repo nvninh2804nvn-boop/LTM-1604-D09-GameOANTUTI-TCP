@@ -1,20 +1,24 @@
-<p align="center">
-  <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoT Lab" width="150"/>
-  <img src="LTM/src/assets/fitdnu_logo.png" alt="FIT DNU" width="200"/>
-  <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam University" width="200"/>
-</p>
+<div align="center">
+  <h2>
+    🎓 <span style="color:#0073e6;">Faculty of Information Technology (DaiNam University)</span>
+  </h2>
+  <hr style="width: 80%;"/>
+  <h2>NETWORK PROGRAMMING</h2>
+  <hr style="width: 80%;"/>
+  
+  <p>
+    <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoT Lab" width="150" style="margin: 0 20px;"/>
+    <img src="LTM/src/assets/fitdnu_logo.png" alt="FIT DNU" width="200" style="margin: 0 20px;"/>
+    <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam University" width="200" style="margin: 0 20px;"/>
+  </p>
 
-<h1 align="center">🎓 Khoa Công nghệ Thông tin – Đại học Đại Nam</h1>
-<h2 align="center">🕹️ Ứng dụng Oẳn Tù Tì Online (TCP Socket + Java Swing)</h2>
+  <p>
+    <a href="#"><span style="background:#8cc63f; color:white; padding:8px 15px; border-radius:5px; font-weight:bold;">AIOTLAB</span></a>
+    <a href="#"><span style="background:#0073e6; color:white; padding:8px 15px; border-radius:5px; font-weight:bold;">FACULTY OF INFORMATION TECHNOLOGY</span></a>
+    <a href="#"><span style="background:#f36f21; color:white; padding:8px 15px; border-radius:5px; font-weight:bold;">DAINAM UNIVERSITY</span></a>
+  </p>
+</div>
 
-<p align="center">
-  <a href="https://www.java.com/"><img src="https://img.shields.io/badge/Java-17+-red?style=for-the-badge&logo=java&logoColor=white"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/TCP-Socket-blue?style=for-the-badge"/></a>
-  <a href="#"><img src="https://img.shields.io/badge/Swing-UI-orange?style=for-the-badge"/></a>
-  <a href="https://www.eclipse.org/"><img src="https://img.shields.io/badge/Eclipse-IDE-purple?style=for-the-badge&logo=eclipseide&logoColor=white"/></a>
-</p>
-
----
 
 ## 📖 1. Giới thiệu hệ thống
 Ứng dụng **Oẳn Tù Tì qua mạng (TCP Socket)** được xây dựng nhằm mô phỏng trò chơi quen thuộc, cho phép người chơi thi đấu trực tuyến qua **LAN** hoặc **Internet**.
