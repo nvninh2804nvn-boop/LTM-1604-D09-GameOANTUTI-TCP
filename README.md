@@ -20,17 +20,17 @@
 </div>
 
 ## 📖 1. Giới thiệu hệ thống
-Ứng dụng **Oẳn Tù Tì qua mạng (TCP Socket)** được xây dựng nhằm mô phỏng trò chơi quen thuộc, cho phép người chơi thi đấu trực tuyến qua **LAN** hoặc **Internet**.
+Ứng dụng Oẳn Tù Tì qua mạng (TCP Socket) được xây dựng nhằm mô phỏng trò chơi quen thuộc, cho phép người chơi thi đấu trực tuyến qua LAN hoặc Internet.
 
 ### 🔹 Hệ thống hỗ trợ:
 - Tạo phòng chơi hoặc tham gia phòng theo mã / ngẫu nhiên.  
-- Thực hiện chọn **✊ Kéo / ✋ Bao / ✌ Búa** và trả về kết quả tức thì.  
-- Đảm bảo tính **ổn định – uy tín – công bằng**.  
+- Thực hiện chọn ✊ Kéo / ✋ Bao / ✌ Búa và trả về kết quả tức thì.  
+- Đảm bảo tính ổn định – uy tín – công bằng.  
 
 ### 🎯 Mục tiêu chính:
-- Nắm vững kiến thức **lập trình mạng với TCP Socket trong Java**.  
-- Thực hành xây dựng **ứng dụng Client–Server nhiều người dùng**.  
-- Ứng dụng vào **bài tập lớn, đồ án, hệ thống game online cơ bản**.  
+- Nắm vững kiến thức lập trình mạng với TCP Socket trong Java.  
+- Thực hành xây dựng ứng dụng Client–Server nhiều người dùng.  
+- Ứng dụng vào bài tập lớn, đồ án, hệ thống game online cơ bản.  
 
 ---
 
@@ -39,8 +39,8 @@
 - **Giao tiếp mạng**: TCP Socket (`ServerSocket`, `Socket`, `I/O Streams`)  
 - **Mô hình kiến trúc**: Client–Server  
 - **Giao diện người dùng**:  
-  - Java Swing (kết hợp **FlatLaf** để UI hiện đại)  
-  - Có thể mở rộng bằng **JavaFX**  
+  - Java Swing (kết hợp FlatLaf để UI hiện đại)  
+  - Có thể mở rộng bằng JavaFX  
 - **Quản lý dự án**: Maven / Gradle (tuỳ chọn)  
 - **IDE khuyến nghị**: IntelliJ IDEA, Eclipse, NetBeans  
 
