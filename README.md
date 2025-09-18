@@ -4,9 +4,9 @@
     </a>
 </h2>
 <h2 align="center">
-   NETWORK PROGRAMMING
+   GAME OẲN TÙ TÌ QUA MẠNG
 </h2>
-<div align="center">
+<div ="center">
     <p align="center">
         <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
         <img src="LTM/src/assets/fitdnu_logo.png" alt="FITDNU Logo" width="180"/>
