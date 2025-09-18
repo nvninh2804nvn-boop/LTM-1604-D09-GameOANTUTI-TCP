@@ -34,7 +34,7 @@
 
 ---
 
-## 🛠️ 2. Công nghệ sử dụng [![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/) [![TCP Socket](https://img.shields.io/badge/TCP--Socket-008080?style=for-the-badge)](#)[![Java Swing](https://img.shields.io/badge/Java%20Swing-6DB33F?style=for-the-badge)](#)
+## 🛠️ 2. Công nghệ sử dụng [![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)[![TCP Socket](https://img.shields.io/badge/TCP--Socket-008080?style=for-the-badge)](#)[![Java Swing](https://img.shields.io/badge/Java%20Swing-6DB33F?style=for-the-badge)](#)[![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white)](#)
 - **Ngôn ngữ lập trình**: Java  
 - **Giao tiếp mạng**: TCP Socket (`ServerSocket`, `Socket`, `I/O Streams`)  
 - **Mô hình kiến trúc**: Client–Server  
