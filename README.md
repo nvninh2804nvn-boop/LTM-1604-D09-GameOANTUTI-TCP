@@ -3,14 +3,16 @@
     🎓 Faculty of Information Technology (DaiNam University)
     </a>
 </h2>
+
 <h2 align="center">
    🎮 Hệ thống trò chơi Oẳn Tù Tì (TCP Socket + Java Swing)
 </h2>
+
 <div align="center">
     <p align="center">
-        <img src="src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
-        <img src="src/assets/fitdnu_logo.png" alt="FIT DNU Logo" width="180"/>
-        <img src="src/assets/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
+        <img src="src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="160"/>
+        <img src="src/assets/fitdnu_logo.png" alt="FIT DNU Logo" width="170"/>
+        <img src="src/assets/dnu_logo.png" alt="DaiNam University Logo" width="190"/>
     </p>
 
 [![AIoTLab](https://img.shields.io/badge/AIoTLab-green?style=for-the-badge)](https://www.facebook.com/DNUAIoTLab)
@@ -22,11 +24,12 @@
 ---
 
 ## 📖 1. Giới thiệu hệ thống
-Ứng dụng *Game Oẳn Tù Tì (Kéo – Búa – Bao)* được phát triển theo mô hình **Client – Server** sử dụng **TCP Socket** trong Java.  
-- **Server**: quản lý kết nối, tạo phòng chơi, nhận lựa chọn từ người chơi, xử lý kết quả.  
-- **Client**: giao diện người dùng (Java Swing), cho phép đăng nhập, tham gia hoặc tạo phòng, chọn Búa/Bao/Kéo và xem kết quả.  
+Ứng dụng **Game Oẳn Tù Tì (Kéo – Búa – Bao)** được xây dựng theo mô hình **Client – Server** sử dụng **TCP Socket** trong Java.  
 
-👉 Hệ thống hướng đến tính **minh bạch – công bằng – dễ mở rộng** với tính năng lưu lịch sử và bảng xếp hạng.
+- **Server**: quản lý kết nối, tạo phòng chơi, xử lý logic và gửi kết quả cho client.  
+- **Client**: giao diện người dùng (Java Swing) cho phép đăng nhập, tham gia/tạo phòng, chọn Búa – Bao – Kéo và hiển thị kết quả.  
+
+👉 Hệ thống đảm bảo tính **công bằng – minh bạch – dễ mở rộng** với các tính năng lưu lịch sử và bảng xếp hạng.
 
 ---
 
@@ -41,51 +44,43 @@
 
 ---
 
-## 📂 3. Cấu trúc thư mục dự án
+## 📂 3. Cấu trúc thư mục
 
+---
 
 ## 🔄 4. Luồng hoạt động
-1. **Server** khởi động, lắng nghe kết nối từ client.  
-2. **Client** mở ứng dụng, thực hiện đăng nhập bằng tài khoản trong `accounts.txt`.  
-3. Người chơi có thể **tạo phòng** hoặc **tham gia phòng** có sẵn.  
-4. Khi đủ người chơi:  
-   - Client gửi lựa chọn (Búa / Bao / Kéo) đến server.  
-   - Server xử lý kết quả và gửi trả lại cho toàn bộ client.  
-5. **Client** hiển thị kết quả và có thể tiếp tục chơi hoặc thoát.  
+1. Server khởi động, mở cổng lắng nghe.  
+2. Client kết nối tới server, thực hiện đăng nhập bằng tài khoản trong `accounts.txt`.  
+3. Người chơi tạo phòng hoặc tham gia phòng.  
+4. Trong một ván:  
+   - Client gửi lựa chọn (Búa / Bao / Kéo).  
+   - Server xử lý kết quả, gửi lại cho tất cả người chơi.  
+5. Client hiển thị kết quả, lưu lịch sử và cập nhật bảng xếp hạng.  
 
 ---
 
 ## 🖼️ 5. Một số hình ảnh hệ thống  
 
-### 🖥️ Giao diện đăng nhập Client  
-![Login](src/assets/client_login.png)  
+### 🔑 Giao diện đăng nhập Client  
+![Login](src/assets/login.png.png)  
 
 ### 🎮 Giao diện chơi game  
-![Game](src/assets/client_game.png)  
+![Game](src/assets/game.png.png)  
 
-### 🖥️ Giao diện Server quản lý kết nối  
-![Server](src/assets/server_dashboard.png)  
+### 📜 Giao diện xem lịch sử  
+![History](src/assets/history.png.png)  
+
+### 🏆 Giao diện bảng xếp hạng  
+![Leaderboard](src/assets/leaderboard.png.png)  
 
 ---
 
 ## ⚙️ 6. Hướng dẫn chạy
 - **Server**
-  ```bash
-  cd src/may_chu
-  javac AppServer.java
-  java AppServer
-Client
 
-bash
-Sao chép mã
-cd src/nguoi_choi
-javac ClientApp.java
-java ClientApp
-📞 7. Liên hệ cá nhân
-👤 Họ và tên: NGUYỄN VIỆT NINH
+## 📞 7. Liên hệ
+- 👤 Họ và tên: NGUYỄN VIỆT NINH 
+- 🎓 Lớp: CNTT 16-04
+- 📧 Email: nvninh2804nvn.@gmail.com* 
+- 📱 Điện thoại: 0969782404  
 
-🎓 Lớp: CNTT 16-04
-
-📧 Email: dnagbinh12@gmail.com
-
-📱 Số điện thoại: 0822968881
