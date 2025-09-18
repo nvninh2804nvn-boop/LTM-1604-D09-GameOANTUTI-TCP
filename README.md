@@ -78,23 +78,7 @@
 
 > ## 📂 Cấu trúc thư mục
 > ```
-> 📦 LTM
-> ┣ 📂 bin
-> ┣ 📂 db
-> ┣ 📂 src
-> ┃ ┣ 📂 assets
-> ┃ ┃ ┣ aiotlab_logo.png
-> ┃ ┃ ┣ dnu_logo.png
-> ┃ ┃ ┣ fitdnu_logo.png
-> ┃ ┃ ┣ login.png.png
-> ┃ ┃ ┣ game.png.png
-> ┃ ┃ ┣ history.png.png
-> ┃ ┃ ┗ leaderboard.png.png
-> ┃ ┣ 📂 may_chu
-> ┃ ┗ 📂 nguoi_choi
-> ┣ accounts.txt
-> ┗ README.md
-> ```
+
 
 ---
 
