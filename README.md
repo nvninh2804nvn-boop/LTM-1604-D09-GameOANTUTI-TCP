@@ -98,14 +98,17 @@
 
 ---
 
-> ## 📬 5. Liên hệ 
-  👤 Họ và tên: NGUYỄN VIỆT NINH
-> 🎓 Khoa: Công nghệ Thông tin – Đại học Đại Nam  
+## 📬 5. Liên hệ  
+
+> 👤 **Họ và tên**: NGUYỄN VIỆT NINH  
+> 🎓 **Khoa**: Công nghệ Thông tin – Đại học Đại Nam  
 > 🌐 [Website Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
-> 📧 Email: nvninh2804@gmail.com  
-> 📱 Fanpage: AIoTLab – FIT DNU 
+> 📧 **Email**: nvninh2804@gmail.com  
+> 📱 **Fanpage**: AIoTLab – FIT DNU  
 >
 > <p align="center">
-© 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved
+> © 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved  
+
+
 > </p>
 
