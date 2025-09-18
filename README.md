@@ -95,14 +95,13 @@
 
 ---
 
-> ## 📬 Liên hệ
-> 👤 **Sinh viên thực hiện**: Nguyễn Việt Ninh  
+> ## 📬 Liên hệ 
 > 🎓 **Khoa**: Công nghệ Thông tin – Đại học Đại Nam  
 > 🌐 [Website Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
 > 📧 Email: **nvninh2804@gmail.com**  
 > 📱 Fanpage: **AIoTLab – FIT DNU**  
 >
 > <p align="center">
->   <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam Logo" width="200"/>
+© 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved
 > </p>
 
