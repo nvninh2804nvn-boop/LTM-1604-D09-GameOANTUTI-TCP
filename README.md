@@ -4,7 +4,7 @@
     </a>
 </h2>
 <h2 align="center">
-   GAME OẲN TÙ TÌ QUA MẠNG (TCP )
+   GAME OẲN TÙ TÌ QUA MẠNG (TCP)
 </h2>
 <div align="center">
     <p align="center">
