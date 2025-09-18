@@ -34,7 +34,7 @@
 
 ---
 
-## 🛠️ 2. Công nghệ sử dụng
+## 🛠️ 2. Công nghệ sử dụng [![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)
 - **Ngôn ngữ lập trình**: Java  
 - **Giao tiếp mạng**: TCP Socket (`ServerSocket`, `Socket`, `I/O Streams`)  
 - **Mô hình kiến trúc**: Client–Server  
