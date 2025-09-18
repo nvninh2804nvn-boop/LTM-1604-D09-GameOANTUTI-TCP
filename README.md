@@ -67,16 +67,16 @@
 ## 🖼️ 5. Một số hình ảnh hệ thống  
 
 ### 🔑 Giao diện đăng nhập Client  
-![Login](LTM/src/assets/login.png)  
+![Login](LTM/src/assets/login.png.png)  
 
 ### 🎮 Giao diện chơi game  
-![Game](LTM/src/assets/game.png)  
+![Game](LTM/src/assets/game.png.png)  
 
 ### 📜 Giao diện xem lịch sử  
-![History](LTM/src/assets/history.png)  
+![History](LTM/src/assets/history.png.png)  
 
 ### 🏆 Giao diện bảng xếp hạng  
-![Leaderboard](LTM/src/assets/leaderboard.png)  
+![Leaderboard](LTM/src/assets/leaderboard.png.png)  
 
 ---
 
