@@ -1,24 +1,23 @@
+<h2 align="center">
+    <a href="https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin">
+    🎓 Faculty of Information Technology (DaiNam University)
+    </a>
+</h2>
+<h2 align="center">
+   NETWORK PROGRAMMING
+</h2>
 <div align="center">
-  <h2>
-    🎓 <span style="color:#0073e6;">Faculty of Information Technology (DaiNam University)</span>
-  </h2>
-  <hr style="width: 80%;"/>
-  <h2>NETWORK PROGRAMMING</h2>
-  <hr style="width: 80%;"/>
-  
-  <p>
-    <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoT Lab" width="150" style="margin: 0 20px;"/>
-    <img src="LTM/src/assets/fitdnu_logo.png" alt="FIT DNU" width="200" style="margin: 0 20px;"/>
-    <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam University" width="200" style="margin: 0 20px;"/>
-  </p>
+    <p align="center">
+        <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
+        <img src="LTM/src/assets/fitdnu_logo.png" alt="FITDNU Logo" width="180"/>
+        <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
+    </p>
 
-  <p>
-    <a href="#"><span style="background:#8cc63f; color:white; padding:8px 15px; border-radius:5px; font-weight:bold;">AIOTLAB</span></a>
-    <a href="#"><span style="background:#0073e6; color:white; padding:8px 15px; border-radius:5px; font-weight:bold;">FACULTY OF INFORMATION TECHNOLOGY</span></a>
-    <a href="#"><span style="background:#f36f21; color:white; padding:8px 15px; border-radius:5px; font-weight:bold;">DAINAM UNIVERSITY</span></a>
-  </p>
+[![AIoTLab](https://img.shields.io/badge/AIoTLab-green?style=for-the-badge)](https://www.facebook.com/DNUAIoTLab)  
+[![Faculty of Information Technology](https://img.shields.io/badge/Faculty%20of%20Information%20Technology-blue?style=for-the-badge)](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
+[![DaiNam University](https://img.shields.io/badge/DaiNam%20University-orange?style=for-the-badge)](https://dainam.edu.vn)
+
 </div>
-
 
 ## 📖 1. Giới thiệu hệ thống
 Ứng dụng **Oẳn Tù Tì qua mạng (TCP Socket)** được xây dựng nhằm mô phỏng trò chơi quen thuộc, cho phép người chơi thi đấu trực tuyến qua **LAN** hoặc **Internet**.
