@@ -62,7 +62,7 @@
 
 ---
 
-> ## ⚙️ Cài đặt
+> ## ⚙️ 4. Cài đặt
 > 1. Cài đặt **JDK 17+ hoặc JDK 21**  
 > 2. Cài **IDE** (Eclipse / IntelliJ / NetBeans)  
 > 3. Clone project:
