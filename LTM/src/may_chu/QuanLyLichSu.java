@@ -1,75 +1,48 @@
 package may_chu;
 
-import java.io.*;
+import java.sql.*;
 import java.util.*;
 
 public class QuanLyLichSu {
-    private static final String FILE = "db/history.csv";
-
-    /** Lưu lịch sử trận đấu */
-    public static void saveHistory(String player, String opponent, String result) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE, true))) {
-            writer.write(player + "," + opponent + "," + result);
-            writer.newLine();
-        } catch (IOException e) {
-            System.err.println("Lỗi ghi lịch sử: " + e.getMessage());
-        }
-    }
 
     /** Đọc lịch sử của 1 người chơi */
-    public static List<String> readHistory(String player) {
+    public static List<String> readHistory(String username) {
         List<String> history = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3 && parts[0].equals(player)) {
-                    history.add(parts[1] + " → " + parts[2]);
-                }
+        try (ResultSet rs = Database.getHistory(username, 20)) { // lấy 20 trận gần nhất
+            while (rs.next()) {
+                String p1 = rs.getString("player1_username");
+                String p2 = rs.getString("player2_username");
+                String winner = rs.getString("winner_username");
+                String playedAt = rs.getString("played_at");
+
+                String opponent = p1.equals(username) ? p2 : p1;
+                String result;
+                if (winner == null) result = "Hòa";
+                else if (winner.equals(username)) result = "Thắng";
+                else result = "Thua";
+
+                history.add(opponent + " → " + result + " (" + playedAt + ")");
             }
-        } catch (IOException e) {
-            System.err.println("Lỗi đọc lịch sử: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("[QuanLyLichSu] Lỗi đọc lịch sử: " + e.getMessage());
         }
         return history;
     }
 
-    /** Tính leaderboard: Top người thắng nhiều nhất */
-    public static Map<String, Integer> getLeaderboard() {
-        Map<String, Integer> wins = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3) {
-                    String player = parts[0];
-                    String result = parts[2];
-                    if ("Thắng".equals(result)) {
-                        wins.put(player, wins.getOrDefault(player, 0) + 1);
-                    }
-                }
+    /** Lấy bảng xếp hạng (top N) */
+    public static Map<String, Integer> getLeaderboard(int topN) {
+        Map<String, Integer> board = new LinkedHashMap<>();
+        try (ResultSet rs = Database.getTopLeaderboard(topN)) {
+            while (rs.next()) {
+                String user = rs.getString("username");
+                int wins = rs.getInt("wins");
+                board.put(user, wins);
             }
-        } catch (IOException e) {
-            System.err.println("Lỗi đọc leaderboard: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("[QuanLyLichSu] Lỗi đọc leaderboard: " + e.getMessage());
         }
-
-        // Sắp xếp giảm dần theo số trận thắng
-        List<Map.Entry<String, Integer>> list = new ArrayList<>(wins.entrySet());
-        list.sort((a, b) -> b.getValue() - a.getValue());
-
-        // Trả về map có thứ tự (LinkedHashMap)
-        Map<String, Integer> sorted = new LinkedHashMap<>();
-        for (Map.Entry<String, Integer> e : list) {
-            sorted.put(e.getKey(), e.getValue());
-        }
-        return sorted;
+        return board;
     }
 
-    // Vẫn giữ để dùng cho AccountManager
-    public static Map<String, String> loadAccounts() {
-        return QuanLyTaiKhoan.loadAccounts();
-    }
-
-    public static void saveAccounts(Map<String, String> accs) {
-        QuanLyTaiKhoan.saveAccounts(accs);
-    }
+    // Các hàm loadAccounts/saveAccounts cũ bỏ hẳn, vì QuanLyTaiKhoan đã dùng DB.
 }

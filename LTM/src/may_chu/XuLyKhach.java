@@ -3,137 +3,142 @@ package may_chu;
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class XuLyKhach implements Runnable {
-    private Socket socket;
+    private final Socket socket;
     private BufferedReader in;
     private PrintWriter out;
+
     private String username;
-    private static Map<String, String> accounts = QuanLyLichSu.loadAccounts();
-    private static Queue<XuLyKhach> waitingQueue = new ConcurrentLinkedQueue<>();
     private XuLyKhach opponent;
     private String move;
 
-    public XuLyKhach(Socket socket) {
-        this.socket = socket;
-    }
+    public XuLyKhach(Socket socket) { this.socket = socket; }
 
+    @Override
     public void run() {
         try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            in  = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
+
             String line;
             while ((line = in.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                switch (parts[0]) {
+                String[] parts = line.split("\\|", -1); // giữ ô trống
+                String cmd = parts[0];
+
+                switch (cmd) {
                     case "REGISTER": handleRegister(parts); break;
-                    case "LOGIN": handleLogin(parts); break;
-                    case "MOVE": handleMove(parts[1]); break;
-                    case "LEAVE": handleLeave(); break;
-                    case "HISTORY": handleHistory(); break;
-                    case "LEADERBOARD": handleLeaderboard(); break;
+                    case "LOGIN":    handleLogin(parts);    break;
+                    case "LOGOUT":   handleLogout();        break;
+
+                    // Lobby / matching
+                    case "RANDOM":   MayChu.qlTroChoi.requestRandomMatch(this); break;
+                    case "INVITE":   handleInvite(parts);   break;   // INVITE|target
+                    case "ACCEPT":   handleAccept(parts);   break;   // ACCEPT|inviter
+
+                    // In-game
+                    case "MOVE":     handleMove(parts);     break;   // MOVE|ROCK/PAPER/SCISSORS
+                    case "LEAVE":    handleLeave();         break;
+
+                    // Data
+                    case "HISTORY":      handleHistory();         break;
+                    case "LEADERBOARD":  handleLeaderboard();     break;
+
+                    default: out.println("ERROR|Lệnh không hợp lệ: " + cmd);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Client disconnected: " + username);
+            System.out.println("❌ Client disconnected: " + username);
         } finally {
+            handleLogout();
             try { socket.close(); } catch (IOException ignored) {}
         }
     }
 
-    /** Đăng ký: nếu user đã tồn tại thì cập nhật mật khẩu mới */
+    /* ===== Auth ===== */
+
     private void handleRegister(String[] parts) {
-        if (parts.length < 3) {
-            out.println("ERROR|Đăng ký không hợp lệ"); 
-            return;
-        }
-        accounts.put(parts[1], parts[2]); // ghi đè nếu đã tồn tại
-        QuanLyLichSu.saveAccounts(accounts);
-        out.println("Registered");
+        if (parts.length < 3) { out.println("ERROR|REGISTER sai cú pháp"); return; }
+        boolean ok = MayChu.qlTaiKhoan.register(parts[1], parts[2]);
+        out.println(ok ? "OK|Đăng ký thành công" : "ERROR|Tài khoản đã tồn tại");
     }
 
-    /** Đăng nhập */
     private void handleLogin(String[] parts) {
-        if (parts.length < 3 || !accounts.containsKey(parts[1]) || !accounts.get(parts[1]).equals(parts[2])) {
-            out.println("ERROR|Sai tên đăng nhập hoặc mật khẩu"); 
-            return;
-        }
+        if (parts.length < 3) { out.println("ERROR|LOGIN sai cú pháp"); return; }
+        boolean ok = MayChu.qlTaiKhoan.login(parts[1], parts[2]);
+        if (!ok) { out.println("ERROR|Sai tên đăng nhập hoặc mật khẩu"); return; }
+
         this.username = parts[1];
-        out.println("OK|Đăng nhập thành công, chờ ghép cặp...");
-        match();
+        MayChu.clients.put(username, this);
+        out.println("OK|Đăng nhập thành công");
+        broadcastUserList();
     }
 
-    /** Ghép cặp trong hàng đợi */
-    private void match() {
-        waitingQueue.add(this);
-        while (opponent == null) {
-            for (XuLyKhach other : waitingQueue) {
-                if (other != this && other.opponent == null) {
-                    this.opponent = other;
-                    other.opponent = this;
-                    waitingQueue.remove(this);
-                    waitingQueue.remove(other);
-                    sendInfo("Đã ghép cặp với " + opponent.username);
-                    opponent.sendInfo("Đã ghép cặp với " + username);
-                    break;
-                }
-            }
-            try { Thread.sleep(300); } catch (InterruptedException ignored) {}
+    private void handleLogout() {
+        if (username != null) {
+            // rời phòng nếu đang chơi
+            handleLeave();
+            MayChu.clients.remove(username);
+            broadcastUserList();
+            username = null;
         }
     }
 
-    /** Xử lý nước đi */
-    private void handleMove(String choice) {
-        this.move = choice;
-        if (opponent != null && opponent.move != null) {
-            String result = XuLyLuotChoi.judge(move, opponent.move);
-            out.println("RESULT|Bạn: " + move + ", Đối thủ: " + opponent.move + " → " + result);
-            opponent.out.println("RESULT|Bạn: " + opponent.move + ", Đối thủ: " + move + " → " + XuLyLuotChoi.judge(opponent.move, move));
+    /* ===== Lobby ===== */
 
-            // lưu lịch sử
-            QuanLyLichSu.saveHistory(username, opponent.username, result);
-            QuanLyLichSu.saveHistory(opponent.username, username, XuLyLuotChoi.judge(opponent.move, move));
-
-            // reset
-            move = null; opponent.move = null;
+    private void broadcastUserList() {
+        String list = String.join(",", MayChu.clients.keySet());
+        for (XuLyKhach c : MayChu.clients.values()) {
+            c.out.println("USER_LIST|" + list);
         }
     }
 
-    /** Thoát phòng */
+    private void handleInvite(String[] parts) {
+        if (parts.length < 2) { out.println("ERROR|INVITE sai cú pháp"); return; }
+        String target = parts[1];
+        MayChu.qlTroChoi.invite(this, target);
+    }
+
+    private void handleAccept(String[] parts) {
+        if (parts.length < 2) { out.println("ERROR|ACCEPT sai cú pháp"); return; }
+        String inviter = parts[1];
+        MayChu.qlTroChoi.acceptInvite(this, inviter);
+    }
+
+    /* ===== In-game ===== */
+
+    private void handleMove(String[] parts) {
+        if (parts.length < 2) { out.println("ERROR|MOVE sai cú pháp"); return; }
+        MayChu.qlTroChoi.handleMove(this, parts[1]);
+    }
+
     private void handleLeave() {
-        if (opponent != null) {
-            opponent.sendBye("Đối thủ đã rời phòng");
-            opponent.opponent = null;
-            opponent.move = null;
-        }
-        this.opponent = null;
-        this.move = null;
-        sendBye("Bạn đã rời phòng");
+        MayChu.qlTroChoi.leave(this);
+        out.println("BYE|Bạn đã rời phòng");
     }
 
-    /** Lấy lịch sử */
+    /* ===== Data ===== */
+
     private void handleHistory() {
+        if (username == null) { out.println("ERROR|Chưa đăng nhập"); return; }
         List<String> history = QuanLyLichSu.readHistory(username);
-        // format thành opponent→kết quả
         out.println("HISTORY|" + String.join(",", history));
     }
 
-    /** Lấy leaderboard (top thắng nhiều nhất) */
     private void handleLeaderboard() {
-        Map<String, Integer> board = QuanLyLichSu.getLeaderboard();
+        Map<String, Integer> board = QuanLyLichSu.getLeaderboard(10);
         List<String> rows = new ArrayList<>();
-        for (var e : board.entrySet()) {
-            rows.add(e.getKey() + ":" + e.getValue());
-        }
+        for (var e : board.entrySet()) rows.add(e.getKey() + ":" + e.getValue());
         out.println("LEADERBOARD|" + String.join(",", rows));
     }
 
-    private void sendBye(String msg) {
-        out.println("BYE|" + msg);
-    }
+    /* ===== getter/setter để QuanLyTroChoi dùng ===== */
+    public void setMove(String m) { this.move = m; }
+    public String getMove() { return this.move; }
 
-    private void sendInfo(String msg) {
-        out.println("INFO|" + msg);
-    }
+    public void setOpponent(XuLyKhach opp) { this.opponent = opp; }
+    public XuLyKhach getOpponent() { return this.opponent; }
+
+    public String getUsername() { return this.username; }
+    public PrintWriter getOut() { return this.out; }
 }
