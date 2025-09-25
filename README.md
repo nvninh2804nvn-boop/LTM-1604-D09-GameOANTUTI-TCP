@@ -120,7 +120,7 @@
 > 👤 **Họ và tên**: Nguyễn Việt Ninh  
 > 🎓 **Khoa**: Công nghệ thông tin –  Trường Đại học Đại Nam   
 > 🌐 [Website Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
-> 📧 **Email**: nvninh2804@gmail.com  
+> 📧 **Email**: nvninh2804.nvn@gmail.com  
 > 📱 **Fanpage**: AIoTLab – FIT DNU  
 >
 > <p align="center">
