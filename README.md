@@ -50,7 +50,7 @@
 
 ### 🔑 Đăng nhập
 <p align="center">
-  <img src="LTM/src/assets/login.png.png" alt="Login UI" width="500"/>
+  <img src="LTM/src/assets/Dangnhap.png.png" alt="Login UI" width="500"/>
 </p>
 <em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em>
 
