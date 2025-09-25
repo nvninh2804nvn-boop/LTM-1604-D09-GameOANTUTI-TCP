@@ -42,7 +42,46 @@
   - Java Swing (kết hợp FlatLaf để UI hiện đại)  
   - Có thể mở rộng bằng JavaFX  
 - Quản lý dự án: Maven / Gradle (tuỳ chọn)  
-- IDE khuyến nghị: IntelliJ IDEA, Eclipsethông tin – Trường đại học Đại Nam  
+- IDE khuyến nghị: IntelliJ IDEA, Eclipse, NetBeans  
+
+---
+
+## 🖼️ 3. Một số hình ảnh hệ thống
+
+### 🔑 Đăng nhập
+<img src="LTM/src/assets/login.png.png" alt="Login UI" width="500"/>
+<em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em> </p>
+### 🎮 Chơi game
+<img src="LTM/src/assets/game.png.png" alt="Game UI" width="500"/>
+<em>Màn hình chơi game – chọn ✊ Kéo / ✋ Bao / ✌ Búa để thi đấu trực tuyến với đối thủ.</em> </p>
+### 📂 Lịch sử
+<img src="LTM/src/assets/history.png.png" alt="History UI" width="500"/>
+<em>Màn hình lịch sử – hiển thị kết quả các trận đã chơi: thời gian, đối thủ, thắng/thua.</em> </p>
+### 🏆 Bảng xếp hạng
+<img src="LTM/src/assets/leaderboard.png.png" alt="Leaderboard UI" width="500"/>
+<br> <em>Màn hình bảng xếp hạng – thống kê thành tích, xếp hạng người chơi theo số trận thắng.</em> </p>
+---
+
+> ## ⚙️ 4. Cài đặt
+> 1. Cài đặt **JDK 17+ hoặc JDK 21**  
+> 2. Cài **IDE** (Eclipse / IntelliJ / NetBeans)  
+> 3. Clone project:
+>    ```bash
+>    git clone https://github.com/nvninh2804nvn-boop/LTM-1604-D09-Game-TCP.git
+>    cd LTM-1604-D09-Game-TCP
+>    ```
+> 4. Chạy chương trình:
+>    - **Server**: `LTM/src/may_chu/AppServer.java`  
+>    - **Client**: `LTM/src/nguoi_choi/ClientApp.java` (mở 2 client để test)  
+
+---
+
+
+
+## 📬 5. Liên hệ  
+
+> 👤 **Họ và tên**: Nguyễn Việt Ninh  
+> 🎓 **Khoa**: Công nghệ thông tin – Trường Đại học Đại Nam  
 > 🌐 [Website Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
 > 📧 **Email**: nvninh2804@gmail.com  
 > 📱 **Fanpage**: AIoTLab – FIT DNU  
@@ -52,4 +91,3 @@
 
 
 > </p>
-
