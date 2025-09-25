@@ -9,7 +9,7 @@
 <div align="center">
     <p align="center">
         <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
-        <img src="LTM/src/assets/fitdnu_logo.png" alt="AIoTLab Logo" width="180"/>
+        <img src="LTM/src/assets/fitdnu_logo.png" alt="FIT DNU Logo" width="180"/>
         <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
     </p>
 
@@ -49,17 +49,29 @@
 ## 🖼️ 3. Một số hình ảnh hệ thống
 
 ### 🔑 Đăng nhập
-<img src="LTM/src/assets/login.png.png" alt="Login UI" width="500"/>
-<em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em> </p>
+<p align="center">
+  <img src="LTM/src/assets/login.png.png" alt="Login UI" width="500"/>
+</p>
+<em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em>
+
 ### 🎮 Chơi game
-<img src="LTM/src/assets/game.png.png" alt="Game UI" width="500"/>
-<em>Màn hình chơi game – chọn ✊ Kéo / ✋ Bao / ✌ Búa để thi đấu trực tuyến với đối thủ.</em> </p>
+<p align="center">
+  <img src="LTM/src/assets/game.png.png" alt="Game UI" width="500"/>
+</p>
+<em>Màn hình chơi game – chọn ✊ Kéo / ✋ Bao / ✌ Búa để thi đấu trực tuyến với đối thủ.</em>
+
 ### 📂 Lịch sử
-<img src="LTM/src/assets/history.png.png" alt="History UI" width="500"/>
-<em>Màn hình lịch sử – hiển thị kết quả các trận đã chơi: thời gian, đối thủ, thắng/thua.</em> </p>
+<p align="center">
+  <img src="LTM/src/assets/history.png.png" alt="History UI" width="500"/>
+</p>
+<em>Màn hình lịch sử – hiển thị kết quả các trận đã chơi: thời gian, đối thủ, thắng/thua.</em>
+
 ### 🏆 Bảng xếp hạng
-<img src="LTM/src/assets/leaderboard.png.png" alt="Leaderboard UI" width="500"/>
-<br> <em>Màn hình bảng xếp hạng – thống kê thành tích, xếp hạng người chơi theo số trận thắng.</em> </p>
+<p align="center">
+  <img src="LTM/src/assets/leaderboard.png.png" alt="Leaderboard UI" width="500"/>
+</p>
+<em>Màn hình bảng xếp hạng – thống kê thành tích, xếp hạng người chơi theo số trận thắng.</em>
+
 ---
 
 > ## ⚙️ 4. Cài đặt
@@ -76,18 +88,14 @@
 
 ---
 
-
-
 ## 📬 5. Liên hệ  
 
 > 👤 **Họ và tên**: Nguyễn Việt Ninh  
-> 🎓 **Khoa**: Công nghệ thông tin – Trường Đại học Đại Nam  
+> 🎓 **Khoa**: Công nghệ thông tin –  Trường Đại học Đại Nam   
 > 🌐 [Website Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
 > 📧 **Email**: nvninh2804@gmail.com  
 > 📱 **Fanpage**: AIoTLab – FIT DNU  
 >
 > <p align="center">
 > © 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved  
-
-
-> </p>
+> </p>  
