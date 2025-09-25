@@ -48,31 +48,58 @@
 
 ## 🖼️ 3. Một số hình ảnh hệ thống
 
+### 📝 Đăng ký
+<p align="center">
+  <img src="LTM/src/assets/Dangki.png.png" alt="Register UI" width="500"/>
+  <br>
+  <em>Màn hình đăng ký – tạo tài khoản mới để tham gia hệ thống.</em>
+</p>
+
+---
+
 ### 🔑 Đăng nhập
 <p align="center">
   <img src="LTM/src/assets/Dangnhap.png.png" alt="Login UI" width="500"/>
+  <br>
+  <em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em>
 </p>
-<em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em>
+
+---
+
+### 🏠 Trang chủ
+<p align="center">
+  <img src="LTM/src/assets/trangchu.png.png" alt="Home UI" width="500"/>
+  <br>
+  <em>Màn hình trang chủ – hiển thị danh sách người chơi online, mời đấu hoặc ghép ngẫu nhiên.</em>
+</p>
+
+---
 
 ### 🎮 Chơi game
 <p align="center">
   <img src="LTM/src/assets/choi.png.png" alt="Game UI" width="500"/>
+  <br>
+  <em>Màn hình chơi game – chọn ✊ Đá / ✋ Bao / ✌ Kéo để thi đấu trực tuyến với đối thủ.</em>
 </p>
-<em>Màn hình chơi game – chọn ✊ Kéo / ✋ Bao / ✌ Búa để thi đấu trực tuyến với đối thủ.</em>
 
-### 📂 Lịch sử
-<p align="center">
-  <img src="LTM/src/assets/Lichsu.png.png" alt="History UI" width="500"/>
-</p>
-<em>Màn hình lịch sử – hiển thị kết quả các trận đã chơi: thời gian, đối thủ, thắng/thua.</em>
+---
 
 ### 🏆 Bảng xếp hạng
 <p align="center">
   <img src="LTM/src/assets/top.png.png" alt="Leaderboard UI" width="500"/>
+  <br>
+  <em>Màn hình bảng xếp hạng – thống kê thành tích, xếp hạng người chơi theo số trận thắng.</em>
 </p>
-<em>Màn hình bảng xếp hạng – thống kê thành tích, xếp hạng người chơi theo số trận thắng.</em>
 
 ---
+
+### 📂 Lịch sử
+<p align="center">
+  <img src="LTM/src/assets/Lichsu.png.png" alt="History UI" width="500"/>
+  <br>
+  <em>Màn hình lịch sử – hiển thị kết quả các trận đã chơi: đối thủ, kết quả, thời gian.</em>
+</p>
+
 
 > ## ⚙️ 4. Cài đặt
 > 1. Cài đặt **JDK 17+ hoặc JDK 21**  
