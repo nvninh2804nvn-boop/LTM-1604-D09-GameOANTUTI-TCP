@@ -1,48 +1,107 @@
 package may_chu;
 
-import java.sql.*;
+import java.io.*;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+/** Lưu kép: SQLite (chính) + CSV mirror (db/history.csv). */
 public class QuanLyLichSu {
+    private static final String CSV = "db/history.csv";
+    private static final SimpleDateFormat DF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    /** Đọc lịch sử của 1 người chơi */
-    public static List<String> readHistory(String username) {
-        List<String> history = new ArrayList<>();
-        try (ResultSet rs = Database.getHistory(username, 20)) { // lấy 20 trận gần nhất
+    static {
+        try {
+            File f = new File(CSV);
+            File dir = f.getParentFile();
+            if (dir != null && !dir.exists()) dir.mkdirs();
+            if (!f.exists()) f.createNewFile();
+        } catch (IOException ignore) {}
+        Database.createTables(); // bảo đảm bảng có sẵn
+    }
+
+    /** Lưu cả vào CSV và SQLite. result = Thắng/Hòa/Thua của 'player' đối đầu 'opponent'. */
+    public static synchronized void saveHistory(String player, String opponent, String result) {
+        // CSV
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(CSV, true))) {
+            w.write(player + "," + opponent + "," + result + "," + DF.format(new Date()));
+            w.newLine();
+        } catch (IOException e) {
+            System.err.println("[CSV] save error: " + e.getMessage());
+        }
+
+        // SQLite
+        String winner = null;
+        if ("Thắng".equals(result)) winner = player;
+        else if ("Thua".equals(result)) winner = opponent; // đối phương thắng
+        Database.saveMatchHistory(player, opponent, winner);
+
+        // cập nhật bảng xếp hạng
+        if ("Thắng".equals(result)) {
+            Database.updateLeaderboard(player, true);
+            Database.updateLeaderboard(opponent, false);
+        } else if ("Thua".equals(result)) {
+            Database.updateLeaderboard(player, false);
+            Database.updateLeaderboard(opponent, true);
+        } // Hòa -> không cộng
+    }
+
+    /** Đọc lịch sử (ưu tiên SQLite; fallback CSV). */
+    public static List<String> readHistory(String user) {
+        // thử SQLite
+        try (ResultSet rs = Database.getHistory(user, 200)) {
+            List<String> out = new ArrayList<>();
             while (rs.next()) {
-                String p1 = rs.getString("player1_username");
-                String p2 = rs.getString("player2_username");
-                String winner = rs.getString("winner_username");
-                String playedAt = rs.getString("played_at");
-
-                String opponent = p1.equals(username) ? p2 : p1;
+                String p1 = rs.getString(1), p2 = rs.getString(2),
+                       winner = rs.getString(3), playedAt = rs.getString(4);
+                String opponent = p1.equals(user) ? p2 : p1;
                 String result;
                 if (winner == null) result = "Hòa";
-                else if (winner.equals(username)) result = "Thắng";
+                else if (winner.equals(user)) result = "Thắng";
                 else result = "Thua";
-
-                history.add(opponent + " → " + result + " (" + playedAt + ")");
+                out.add(opponent + " → " + result + " (" + playedAt + ")");
             }
-        } catch (SQLException e) {
-            System.err.println("[QuanLyLichSu] Lỗi đọc lịch sử: " + e.getMessage());
-        }
-        return history;
+            return out;
+        } catch (Exception ignore) { }
+
+        // fallback CSV
+        List<String> out = new ArrayList<>();
+        try (BufferedReader r = new BufferedReader(new FileReader(CSV))) {
+            String line;
+            while ((line = r.readLine()) != null) {
+                String[] p = line.split(",", -1);
+                if (p.length >= 4 && p[0].equals(user)) {
+                    out.add(p[1] + " → " + p[2] + " (" + p[3] + ")");
+                }
+            }
+        } catch (IOException e) { System.err.println("[CSV] read error: " + e.getMessage()); }
+        return out;
     }
 
-    /** Lấy bảng xếp hạng (top N) */
-    public static Map<String, Integer> getLeaderboard(int topN) {
-        Map<String, Integer> board = new LinkedHashMap<>();
-        try (ResultSet rs = Database.getTopLeaderboard(topN)) {
-            while (rs.next()) {
-                String user = rs.getString("username");
-                int wins = rs.getInt("wins");
-                board.put(user, wins);
-            }
-        } catch (SQLException e) {
-            System.err.println("[QuanLyLichSu] Lỗi đọc leaderboard: " + e.getMessage());
-        }
-        return board;
-    }
+    /** Leaderboard từ SQLite; fallback tính từ CSV. */
+    public static LinkedHashMap<String,Integer> getLeaderboard() {
+        // SQLite
+        try (ResultSet rs = Database.getTopLeaderboard(100)) {
+            LinkedHashMap<String,Integer> map = new LinkedHashMap<>();
+            while (rs.next()) map.put(rs.getString(1), rs.getInt(2));
+            return map;
+        } catch (Exception ignore) {}
 
-    // Các hàm loadAccounts/saveAccounts cũ bỏ hẳn, vì QuanLyTaiKhoan đã dùng DB.
+        // CSV
+        Map<String,Integer> wins = new HashMap<>();
+        try (BufferedReader r = new BufferedReader(new FileReader(CSV))) {
+            String line;
+            while ((line = r.readLine()) != null) {
+                String[] p = line.split(",", -1);
+                if (p.length >= 3 && "Thắng".equals(p[2])) {
+                    wins.put(p[0], wins.getOrDefault(p[0], 0) + 1);
+                }
+            }
+        } catch (IOException e) { System.err.println("[CSV] leaderboard: " + e.getMessage()); }
+        List<Map.Entry<String,Integer>> list = new ArrayList<>(wins.entrySet());
+        list.sort((a,b)-> b.getValue()-a.getValue());
+        LinkedHashMap<String,Integer> res = new LinkedHashMap<>();
+        for (var e : list) res.put(e.getKey(), e.getValue());
+        return res;
+    }
 }

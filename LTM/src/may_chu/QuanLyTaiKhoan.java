@@ -1,84 +1,56 @@
 package may_chu;
 
-import java.sql.*;
+import java.io.*;
+import java.util.*;
 
-/**
- * QuanLyTaiKhoan - dùng JDBC qua Database.getConnection()
- * Tự tạo bảng users nếu chưa có.
- */
+/** Lưu user:pass bằng file db/accounts.txt cho đơn giản. */
 public class QuanLyTaiKhoan {
+    private static final String ACC_FILE = "db/accounts.txt";
 
-    public QuanLyTaiKhoan() {
-        ensureSchema();
-    }
-
-    /** Tạo bảng users nếu chưa tồn tại */
-    private void ensureSchema() {
-        final String sql = """
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT UNIQUE NOT NULL,
-                password TEXT NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            );
-        """;
-        try (Connection conn = Database.getConnection();
-             Statement st = conn.createStatement()) {
-            st.execute(sql);
-        } catch (SQLException e) {
-            System.err.println("[QuanLyTaiKhoan] Lỗi tạo bảng users: " + e.getMessage());
+    /** Đảm bảo db/ và file tồn tại. */
+    public static void ensureStorage() {
+        try {
+            File f = new File(ACC_FILE);
+            File dir = f.getParentFile();
+            if (dir != null && !dir.exists()) dir.mkdirs();
+            if (!f.exists()) f.createNewFile();
+        } catch (IOException e) {
+            System.err.println("[ACC] ensureStorage error: " + e.getMessage());
         }
     }
 
-    /** Đăng ký: username duy nhất */
-    public boolean register(String username, String password) {
-        if (username == null || username.isBlank() || password == null || password.isBlank())
-            return false;
-
-        final String insert = "INSERT INTO users(username, password) VALUES(?, ?)";
-        try (Connection conn = Database.getConnection();
-             PreparedStatement ps = conn.prepareStatement(insert)) {
-            ps.setString(1, username.trim());
-            ps.setString(2, password); // TODO: nên mã hóa (bcrypt) nếu dùng thật
-            ps.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            // Lỗi thường gặp: UNIQUE constraint failed: users.username
-            // => tài khoản đã tồn tại
-            return false;
-        }
-    }
-
-    /** Đăng nhập: so sánh username+password đơn giản (demo) */
-    public boolean login(String username, String password) {
-        if (username == null || password == null) return false;
-
-        final String query = "SELECT 1 FROM users WHERE username = ? AND password = ? LIMIT 1";
-        try (Connection conn = Database.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, username.trim());
-            ps.setString(2, password);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
+    /** Đọc accounts -> map (giữ thứ tự để dễ diff). */
+    public static Map<String, String> loadAccounts() {
+        ensureStorage();
+        Map<String, String> map = new LinkedHashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(ACC_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                int i = line.indexOf(':');
+                if (i > 0) {
+                    String user = line.substring(0, i).trim();
+                    String pass = line.substring(i + 1);
+                    if (!user.isEmpty()) map.put(user, pass);
+                }
             }
-        } catch (SQLException e) {
-            System.err.println("[QuanLyTaiKhoan] Lỗi đăng nhập: " + e.getMessage());
-            return false;
+        } catch (IOException e) {
+            System.err.println("[ACC] load error: " + e.getMessage());
         }
+        return map;
     }
 
-    /** Lấy id người dùng (hữu ích cho lưu lịch sử/leaderboard) */
-    public Integer getUserId(String username) {
-        final String sql = "SELECT id FROM users WHERE username = ? LIMIT 1";
-        try (Connection conn = Database.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, username);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getInt("id");
+    /** Ghi accounts theo alphabet để không “đảo” lung tung. */
+    public static void saveAccounts(Map<String, String> accounts) {
+        ensureStorage();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ACC_FILE))) {
+            var users = new ArrayList<>(accounts.keySet());
+            users.sort(String.CASE_INSENSITIVE_ORDER);
+            for (String u : users) {
+                bw.write(u + ":" + accounts.get(u));
+                bw.newLine();
             }
-        } catch (SQLException e) {
-            System.err.println("[QuanLyTaiKhoan] Lỗi getUserId: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("[ACC] save error: " + e.getMessage());
         }
-        return null;
     }
 }

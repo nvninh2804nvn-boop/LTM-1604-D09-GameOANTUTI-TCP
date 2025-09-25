@@ -2,30 +2,27 @@ package may_chu;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/** Entry của server TCP. */
 public class MayChu {
-    // Danh sách client online: username -> handler
-    public static ConcurrentHashMap<String, XuLyKhach> clients = new ConcurrentHashMap<>();
+    public static final int PORT = 7777;
 
-    // Quản lý tài khoản / trò chơi (dùng chung)
-    public static QuanLyTaiKhoan qlTaiKhoan = new QuanLyTaiKhoan();
-    public static QuanLyTroChoi qlTroChoi = new QuanLyTroChoi();
+    /** Danh bạ người online: username -> handler */
+    public static final Map<String, XuLyKhach> clients = new ConcurrentHashMap<>();
 
-    public static void main(String[] args) {
-        try (ServerSocket server = new ServerSocket(7777)) {
-            System.out.println("🚀 Server started on port 7777...");
-            // Tạo bảng DB nếu chưa có
-            Database.createTables();
+    public static void main(String[] args) throws Exception {
+        // đảm bảo DB & file sẵn sàng
+        QuanLyTaiKhoan.ensureStorage();
+        Database.createTables();
 
+        try (ServerSocket server = new ServerSocket(PORT)) {
+            System.out.println("Server started on port " + PORT + " ...");
             while (true) {
                 Socket socket = server.accept();
-                System.out.println("🔗 New client connected: " + socket.getRemoteSocketAddress());
-                new Thread(new XuLyKhach(socket)).start();
+                new Thread(new XuLyKhach(socket), "ClientHandler").start();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
-

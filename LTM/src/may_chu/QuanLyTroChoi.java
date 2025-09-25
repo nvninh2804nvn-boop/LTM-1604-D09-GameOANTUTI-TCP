@@ -1,91 +1,89 @@
 package may_chu;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+/** Tổ chức ghép cặp + xử lý ván chơi. */
 public class QuanLyTroChoi {
-    /** Hàng đợi cho random match */
-    private final Queue<XuLyKhach> randomQueue = new ConcurrentLinkedQueue<>();
-    /** Map phòng chơi: username -> đối thủ */
-    private final Map<String, XuLyKhach> opponents = new ConcurrentHashMap<>();
+    /** Hàng đợi ghép ngẫu nhiên (server-wide). */
+    private static final ConcurrentLinkedQueue<XuLyKhach> waiting = new ConcurrentLinkedQueue<>();
 
-    /** Yêu cầu ghép cặp ngẫu nhiên */
-    public void requestRandomMatch(XuLyKhach player) {
-        randomQueue.offer(player);
-        tryPairing();
-    }
-
-    private synchronized void tryPairing() {
-        while (randomQueue.size() >= 2) {
-            XuLyKhach p1 = randomQueue.poll();
-            XuLyKhach p2 = randomQueue.poll();
-            if (p1 == null || p2 == null) break;
-            createRoom(p1, p2);
-        }
-    }
-
-    /** Tạo phòng giữa 2 người chơi */
-    public void createRoom(XuLyKhach p1, XuLyKhach p2) {
-        opponents.put(p1.getUsername(), p2);
-        opponents.put(p2.getUsername(), p1);
-
+    /** Tạo phòng giữa 2 người. */
+    public static void createRoom(XuLyKhach p1, XuLyKhach p2) {
+        if (p1 == null || p2 == null) return;
         p1.setOpponent(p2);
         p2.setOpponent(p1);
-
         p1.getOut().println("START|" + p2.getUsername());
         p2.getOut().println("START|" + p1.getUsername());
     }
 
-    /** Mời người chơi cụ thể */
-    public void invite(XuLyKhach from, String targetName) {
+    /** Mời người chơi cụ thể. */
+    public static void invite(XuLyKhach from, String targetName) {
         XuLyKhach target = MayChu.clients.get(targetName);
-        if (target != null) target.getOut().println("INVITE|" + from.getUsername());
-        else from.getOut().println("ERROR|Người chơi không tồn tại hoặc offline");
+        if (target != null && target.getOpponent() == null && from.getOpponent() == null) {
+            target.getOut().println("INVITE|" + from.getUsername());
+            from.getOut().println("INFO|Đã gửi lời mời tới " + targetName);
+        } else {
+            from.getOut().println("ERROR|Người chơi không sẵn sàng");
+        }
     }
 
-    /** Đồng ý lời mời */
-    public void acceptInvite(XuLyKhach from, String inviterName) {
+    /** Đồng ý lời mời. */
+    public static void acceptInvite(XuLyKhach from, String inviterName) {
         XuLyKhach inviter = MayChu.clients.get(inviterName);
-        if (inviter != null) createRoom(from, inviter);
-        else from.getOut().println("ERROR|Người mời không còn online");
+        if (inviter != null && inviter.getOpponent() == null && from.getOpponent() == null) {
+            createRoom(inviter, from);
+        } else {
+            from.getOut().println("ERROR|Người mời đã bận hoặc offline");
+        }
     }
 
-    /** Thực hiện nước đi (ĐÃ SỬA – bỏ cast sai) */
-    public void handleMove(XuLyKhach player, String move) {
-        XuLyKhach opp = opponents.get(player.getUsername());
-        if (opp == null) {
-            player.getOut().println("ERROR|Bạn chưa có đối thủ");
+    /** Ghép ngẫu nhiên. */
+    public static void randomMatch(XuLyKhach me) {
+        if (me.getOpponent() != null) {
+            me.getOut().println("ERROR|Bạn đang bận");
             return;
         }
+        // thử lấy 1 người đang chờ
+        XuLyKhach other;
+        while ((other = waiting.poll()) != null) {
+            if (other != me && other.getOpponent() == null) {
+                createRoom(me, other);
+                return;
+            }
+        }
+        // nếu chưa có ai -> vào hàng chờ
+        waiting.offer(me);
+        me.getOut().println("INFO|Đang chờ ghép ngẫu nhiên...");
+    }
+
+    /** Nhận nước đi; khi đủ 2 bên thì chấm điểm và trả kết quả + lưu kép. */
+    public static void handleMove(XuLyKhach player, String move) {
+        XuLyKhach opp = player.getOpponent();
+        if (opp == null) { player.getOut().println("ERROR|Bạn chưa có đối thủ"); return; }
 
         player.setMove(move);
 
         if (player.getMove() != null && opp.getMove() != null) {
-            String[] res = XuLyLuotChoi.xuLyKetQua(
-                player.getUsername(), player.getMove(),
-                opp.getUsername(),   opp.getMove()
-            );
+            String r1 = XuLyLuotChoi.judge(player.getMove(), opp.getMove());
+            String r2 = XuLyLuotChoi.judge(opp.getMove(), player.getMove());
 
-            player.getOut().println("RESULT|" + res[0]);
-            opp.getOut().println("RESULT|" + res[1]);
+            player.getOut().println("RESULT|Bạn: " + player.getMove()
+                    + ", Đối thủ: " + opp.getMove() + " → " + r1);
+            opp.getOut().println   ("RESULT|Bạn: " + opp.getMove()
+                    + ", Đối thủ: " + player.getMove() + " → " + r2);
 
-            // Reset để chơi tiếp ván mới
+            // ✅ lưu kép (SQLite + CSV)
+            QuanLyLichSu.saveHistory(player.getUsername(), opp.getUsername(), r1);
+            QuanLyLichSu.saveHistory(opp.getUsername(), player.getUsername(), r2);
+
+            // reset ván
             player.setMove(null);
             opp.setMove(null);
         }
     }
 
-    /** Người chơi thoát phòng */
-    public void leave(XuLyKhach player) {
-        XuLyKhach opp = opponents.remove(player.getUsername());
-        if (opp != null) {
-            opponents.remove(opp.getUsername());
-            opp.setOpponent(null);
-            opp.setMove(null);
-            opp.getOut().println("BYE|Đối thủ đã thoát");
-        }
-        player.setOpponent(null);
-        player.setMove(null);
+    /** Khi người chơi rời phòng/hủy ghép, loại bỏ khỏi hàng chờ. */
+    public static void removeFromQueue(XuLyKhach player) {
+        waiting.remove(player);
     }
 }
