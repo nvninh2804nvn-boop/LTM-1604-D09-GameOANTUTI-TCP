@@ -48,16 +48,16 @@
 
 ## 🖼️ 3. Một số hình ảnh hệ thống
 
-### 🔑 Đăng nhập
+🔑 Đăng nhập
 <img src="LTM/src/assets/login.png.png" alt="Login UI" width="500"/>
 <em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em> </p>
-### 🎮 Chơi game
+🎮 Chơi game
 <img src="LTM/src/assets/game.png.png" alt="Game UI" width="500"/>
 <em>Màn hình chơi game – chọn ✊ Kéo / ✋ Bao / ✌ Búa để thi đấu trực tuyến với đối thủ.</em> </p>
-### 📂 Lịch sử
+📂 Lịch sử
 <img src="LTM/src/assets/history.png.png" alt="History UI" width="500"/>
 <em>Màn hình lịch sử – hiển thị kết quả các trận đã chơi: thời gian, đối thủ, thắng/thua.</em> </p>
-### 🏆 Bảng xếp hạng
+🏆 Bảng xếp hạng
 <img src="LTM/src/assets/leaderboard.png.png" alt="Leaderboard UI" width="500"/>
 <br> <em>Màn hình bảng xếp hạng – thống kê thành tích, xếp hạng người chơi theo số trận thắng.</em> </p>
 ---
