@@ -78,14 +78,14 @@
 
 ### 🎮 Chơi game
 <p align="center">
-  <img src="LTM/src/assets/game.png.png" alt="Game UI" width="500"/>
+  <img src="LTM/src/assets/choi.png.png" alt="Game UI" width="500"/>
 </p>
 
 ---
 
 ### 🏆 Bảng xếp hạng
 <p align="center">
-  <img src="LTM/src/assets/leaderboard.png.png" alt="Leaderboard UI" width="500"/>
+  <img src="LTM/src/assets/toptop.png.png" alt="Leaderboard UI" width="500"/>
 </p>
 
 ---
@@ -111,7 +111,7 @@ Server: LTM/src/may_chu/AppServer.java
 
 Client: LTM/src/nguoi_choi/UngDungClient.java (mở 2 client để test)
 
-📬 5. Liên hệ
+## 📬 5. Liên hệ
 
 👤 Họ và tên: Nguyễn Việt Ninh
 🎓 Khoa: Công nghệ thông tin – Trường Đại học Đại Nam
@@ -121,4 +121,4 @@ Client: LTM/src/nguoi_choi/UngDungClient.java (mở 2 client để test)
 
 📱 Fanpage: AIoTLab – FIT DNU
 
-<p align="center"> © 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved </p> ```
+<p align="center"> © 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved </p> 
