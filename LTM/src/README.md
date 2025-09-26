@@ -1,108 +1,124 @@
- 🎮 GAME OẢN TÙ TÌ TCP
+<h2 align="center">
+  <a href="https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin">
+  🎓 Faculty of Information Technology (DaiNam University)
+  </a>
+</h2>
 
-![AIoTLab Logo](assets/aiotlab.png)  
-![Khoa CNTT Logo](assets/fit.png)  
-![Đại học Đại Nam Logo](assets/dainam.png)  
+<h2 align="center">
+   GAME OẲN TÙ TÌ QUA MẠNG (TCP)
+</h2>
 
-[AIoTLab](https://www.facebook.com/DNUAIoTLab) | [Khoa Công nghệ Thông tin](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin) | [Trường Đại học Đại Nam](https://dainam.edu.vn)
+<div align="center">
+  <p align="center">
+    <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="160"/>
+    <img src="LTM/src/assets/fitdnu_logo.png" alt="FIT DNU Logo" width="180"/>
+    <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
+  </p>
 
----
-
-📘 1. Giới thiệu
-Hệ thống được xây dựng nhằm mô phỏng trò chơi Oẳn Tù Tì (Rock–Paper–Scissors) giữa hai người chơi thông qua Java TCP Socket.  
-Gồm 2 phần:
-- Máy chủ (Server): quản lý tài khoản, kết nối, ghép cặp, xử lý trận đấu, lưu lịch sử, bảng xếp hạng.  
-- Máy khách (Client): giao diện Swing thân thiện, cho phép đăng nhập, chơi, xem lịch sử, thoát phòng.  
-
-👉 Ưu điểm:
-- Kết nối TCP ổn định.  
-- Giao diện trực quan, dùng emoji ✊✋✌.  
-- Có lưu lịch sử và bảng xếp hạng.  
-- Hỗ trợ thoát phòng an toàn.  
-
----
-
- 🛠 2. Công nghệ sử dụng
-- Ngôn ngữ: Java (JDK 17+ / JDK 21)  
-- Giao diện: Java Swing  
-- Kết nối: TCP Socket  
-- Lưu trữ: File txt, csv  
-- IDE khuyến nghị: Eclipse IDE  
-
----
- 📸 3. Ảnh giao diện
-
- 🔑 Đăng nhập
-![Giao diện đăng nhập](assets/login.png)
-
- 🎮 Chơi game
-![Giao diện chơi](assets/game.png)
-  📂 Lịch sử
-![Lịch sử trận đấu](assets/history.png)
-🏆 Bảng xếp hạng
-![Bảng xếp hạng](assets/leaderboard.png)
-
----
- 🚀 4. Cài đặt & chạy
-1. Cài **JDK 17+** (hoặc JDK 21).  
-2. Clone hoặc copy project về máy.  
-3. Mở project trong Eclipse.  
-4. Chạy **Server**: `may_chu/UngDungMayChu.java`.  
-5. Chạy **Client**: `khach_hang/UngDungKhach.java` (mở 2 client để test).  
-6. Tài khoản lưu tại `db/taikhoan.txt`, lịch sử lưu tại `db/lichsu.csv`.  
-
-📦 LTM (thư mục gốc của project)
-
-khach_hang/ (code phía client)
-
-UngDungKhach.java → chạy client (main)
-
-GiaoDienTroChoi.java → giao diện Swing
-
-KetNoiKhach.java → xử lý kết nối TCP
-
-TienIch.java → tiện ích (hash mật khẩu, hỗ trợ)
-
-may_chu/ (code phía server)
-
-UngDungMayChu.java → chạy server (main)
-
-XuLyKhach.java → xử lý kết nối từng client
-
-QuanLyTroChoi.java → quản lý logic ghép phòng & trận
-
-XuLyLuotChoi.java → xử lý luật oẳn tù tì
-
-QuanLyTaiKhoan.java → quản lý tài khoản (đăng ký, lưu file)
-
-QuanLyLichSu.java → quản lý lịch sử và bảng xếp hạng
-
-db/ (thư mục lưu trữ dữ liệu)
-
-taikhoan.txt → lưu tài khoản (username:hash)
-
-lichsu.csv → lưu lịch sử trận đấu
-
-assets/ (ảnh giao diện để chèn README)
-
-login.png
-
-game.png
-
-history.png
-
-leaderboard.png
-
-README.md (file mô tả project)
-🏆 6. Các tính năng chính
-- 🔒 Đăng ký / Đăng nhập (hash mật khẩu SHA-256).  
-- 👫 Ghép cặp tự động giữa 2 người chơi.  
-- ✊✋✌ Chơi Oẳn Tù Tì với kết quả trực quan (emoji + màu sắc).  
-- 📜 Lưu lịch sử đầy đủ vào file CSV.  
-- 🏆 Bảng xếp hạng từ lịch sử thực tế.  
-- 🚪 Hỗ trợ thoát phòng.  
+  [![AIoTLab](https://img.shields.io/badge/AIoTLab-green?style=for-the-badge)](https://www.facebook.com/DNUAIoTLab)
+  [![Faculty of Information Technology](https://img.shields.io/badge/FIT-DNU-blue?style=for-the-badge)](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)
+  [![DaiNam University](https://img.shields.io/badge/DaiNam%20University-orange?style=for-the-badge)](https://dainam.edu.vn)
+</div>
 
 ---
 
-✍️ Sinh viên thực hiện: Nguyễn Việt Ninh – CNTT 16-04  
-📅 Môn học: Lập trình mạng (LTM) 
+## 📖 1. Giới thiệu hệ thống
+Ứng dụng **Oẳn Tù Tì qua mạng (TCP Socket)** được phát triển nhằm mô phỏng trò chơi quen thuộc, cho phép người chơi thi đấu trực tuyến qua **LAN** hoặc **Internet**.
+
+### 🔹 Hệ thống hỗ trợ:
+- Đăng ký & Đăng nhập tài khoản  
+- Tạo phòng chơi hoặc tham gia phòng ngẫu nhiên  
+- Chọn ✊ Đá / ✋ Bao / ✌ Kéo và trả kết quả tức thì  
+- Lưu lại **lịch sử thi đấu** và **bảng xếp hạng** người chơi  
+
+### 🎯 Mục tiêu chính:
+- Thực hành lập trình mạng với TCP Socket trong Java  
+- Nắm vững kiến thức về kiến trúc Client–Server  
+- Xây dựng ứng dụng game online cơ bản, nhiều người dùng  
+
+---
+
+## 🛠️ 2. Công nghệ sử dụng
+
+[![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)  
+[![TCP Socket](https://img.shields.io/badge/TCP--Socket-008080?style=for-the-badge)](#)  
+[![Swing](https://img.shields.io/badge/Java%20Swing-6DB33F?style=for-the-badge)](#)  
+[![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white)](#)  
+
+- **Ngôn ngữ:** Java  
+- **Mạng:** TCP Socket (`ServerSocket`, `Socket`, `I/O Streams`)  
+- **Giao diện:** Java Swing (FlatLaf theme)  
+- **Quản lý dự án:** Maven / Gradle (tùy chọn)  
+- **IDE:** Eclipse, IntelliJ IDEA, hoặc NetBeans  
+
+---
+
+## 🖼️ 3. Giao diện hệ thống
+
+### 🔑 Đăng nhập
+<p align="center">
+  <img src="LTM/src/assets/Dangnhap.png.png" alt="Login UI" width="500"/>
+</p>
+
+---
+
+### 📝 Đăng ký
+<p align="center">
+  <img src="LTM/src/assets/Dangki.png.png" alt="Register UI" width="500"/>
+</p>
+
+---
+
+### 🏠 Trang chủ
+<p align="center">
+  <img src="LTM/src/assets/trangchu.png.png" alt="Home UI" width="500"/>
+</p>
+
+---
+
+### 🎮 Chơi game
+<p align="center">
+  <img src="LTM/src/assets/game.png.png" alt="Game UI" width="500"/>
+</p>
+
+---
+
+### 🏆 Bảng xếp hạng
+<p align="center">
+  <img src="LTM/src/assets/leaderboard.png.png" alt="Leaderboard UI" width="500"/>
+</p>
+
+---
+
+### 📂 Lịch sử
+<p align="center">
+  <img src="LTM/src/assets/Lichsu.png.png" alt="History UI" width="500"/>
+</p>
+
+---
+
+## ⚙️ 4. Cài đặt & Chạy
+
+1. Cài đặt **JDK 17+ hoặc JDK 21**  
+2. Cài đặt IDE (Eclipse / IntelliJ / NetBeans)  
+3. Clone project:
+   ```bash
+   git clone https://github.com/nvninh2804nvn-boop/LTM-1604-D09-Game-TCP.git
+   cd LTM-1604-D09-Game-TCP
+Chạy chương trình:
+
+Server: LTM/src/may_chu/AppServer.java
+
+Client: LTM/src/nguoi_choi/UngDungClient.java (mở 2 client để test)
+
+📬 5. Liên hệ
+
+👤 Họ và tên: Nguyễn Việt Ninh
+🎓 Khoa: Công nghệ thông tin – Trường Đại học Đại Nam
+🌐 Website Khoa CNTT – DNU
+
+📧 Email: nvninh2804@gmail.com
+
+📱 Fanpage: AIoTLab – FIT DNU
+
+<p align="center"> © 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved </p> ```
