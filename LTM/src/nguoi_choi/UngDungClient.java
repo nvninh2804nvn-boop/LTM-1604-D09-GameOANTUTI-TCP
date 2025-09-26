@@ -11,13 +11,14 @@ import java.awt.event.MouseEvent;
  * Oẳn Tù Tì Online — Premium Compact UI (2025, Pink Edition)
  * - Typography dịu mắt
  * - Card bo góc + đổ bóng, nút pill/ghost có hover
- * - Input có icon, password có 👁/🙈 (đã fix echoChar)
+ * - Input: KHÔNG icon/emoji (tránh ô vuông) + nút Hiện/Ẩn text
  * - Trang chủ: search + empty state
  * - Lịch sử: màu/icon kết quả
- * - BXH: 🥇🥈🥉 + thanh tiến độ + highlight user hiện tại
- * - GamePanel: Emoji, ⬅ Về trang chủ, ESC; Thoát phòng điều hướng ngay
+ * - BXH: KHÔNG emoji huy chương; chỉ hiện số hạng (đậm) + thanh tiến độ
+ * - GamePanel: Emoji KÉO/BÚA/BAO, ⬅ Về trang chủ, ESC; Thoát phòng điều hướng ngay
  * - Theme: Hồng pastel, “blink blink ✨” khi Thắng!
- * Giữ nguyên API KetNoiKhach, thêm alias `connection`.
+ * - Heading: ✨ tiêu đề ✨ + subtitle nowrap 1 dòng
+ * ✅ Nước đi hiển thị & thứ tự: KÉO – BÚA – BAO (server vẫn SCISSORS/ROCK/PAPER)
  */
 public class UngDungClient extends JFrame {
 
@@ -34,9 +35,9 @@ public class UngDungClient extends JFrame {
         // Card + viền + bóng
         Color CARD_BG            = Color.WHITE;
         Color CARD_BORDER        = new Color(0xF5DCE6); // viền phấn hồng
-        Color SHADOW             = new Color(0,0,0,18);
+        Color SHADOW             = new Color(0,0,0,22);
 
-        // Tông hồng làm màu nhấn (map vào tên cũ để không phải sửa chỗ khác)
+        // Tông hồng làm màu nhấn
         Color BLUE               = new Color(0xEC4899); // pink (primary)
         Color GREEN              = new Color(0xFB7185); // rose (success)
         Color ORANGE             = new Color(0xF9A8D4); // blush
@@ -181,7 +182,7 @@ public class UngDungClient extends JFrame {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             int w = getWidth(), h = getHeight();
             g2.setColor(Palette.SHADOW);
-            g2.fillRoundRect(4, 6, w-10, h-10, radius+6, radius+6);
+            g2.fillRoundRect(4, 6, w-10, h-10, radius+8, radius+8);
             g2.setColor(Palette.CARD_BG);
             g2.fillRoundRect(0, 0, w-10, h-10, radius, radius);
             g2.setColor(Palette.CARD_BORDER);
@@ -195,12 +196,17 @@ public class UngDungClient extends JFrame {
         }
     }
 
-    /** Heading to, subtitle lớn và có icon 💖 */
+    /** Heading có ✨ hai bên, subtitle nhỏ & nowrap để không xuống dòng */
     private JLabel heading(String title, String subtitle) {
-        return new JLabel("<html><div style='line-height:1.6'>"
-                + "<div style='font-weight:700;font-size:22px;color:#31111D'>💖 " + title + "</div>"
-                + (subtitle==null?"":"<div style='font-size:14px;color:#6B5B6E;margin-top:6px;'>"+subtitle+"</div>")
-                + "</div></html>");
+        String html = "<html><div style='line-height:1.5'>"
+                + "<div style='font-weight:700;font-size:20px;color:#31111D;white-space:nowrap;'>"
+                + "✨ " + title + " ✨"
+                + "</div>"
+                + (subtitle==null ? "" :
+                   "<div style='font-size:12px;color:#6B5B6E;margin-top:4px;white-space:nowrap;'>"
+                   + subtitle + "</div>")
+                + "</div></html>";
+        return new JLabel(html);
     }
 
     private static class PillButton extends JButton {
@@ -208,8 +214,8 @@ public class UngDungClient extends JFrame {
         PillButton(String t, Color b){ super(t); base=b;
             setFocusPainted(false); setForeground(Color.WHITE);
             setOpaque(false); setContentAreaFilled(false);
-            setBorder(new EmptyBorder(10,16,10,16));
-            setFont(new Font("Segoe UI", Font.BOLD, 14));
+            setBorder(new EmptyBorder(8,14,8,14));
+            setFont(new Font("Segoe UI", Font.BOLD, 13));
             setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             var self=this;
             addMouseListener(new MouseAdapter(){
@@ -224,7 +230,8 @@ public class UngDungClient extends JFrame {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             int w=getWidth(),h=getHeight(); Color c=base;
             if(press) c=c.darker(); else if(hover) c=c.brighter();
-            g2.setColor(c); g2.fillRoundRect(0,0,w,h,999,999); g2.dispose();
+            g2.setPaint(new GradientPaint(0,0,c, w,0, c.brighter()));
+            g2.fillRoundRect(0,0,w,h,999,999); g2.dispose();
             super.paintComponent(g);
         }
     }
@@ -233,10 +240,10 @@ public class UngDungClient extends JFrame {
         JButton b=new JButton(t);
         b.setFocusPainted(false);
         b.setForeground(Palette.TEXT_PRIMARY);
-        b.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        b.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         b.setOpaque(true);
         b.setBackground(Palette.GRAY_100);
-        b.setBorder(new CompoundBorder(new LineBorder(Palette.GRAY_200,1,true), new EmptyBorder(8,14,8,14)));
+        b.setBorder(new CompoundBorder(new LineBorder(Palette.GRAY_200,1,true), new EmptyBorder(6,12,6,12)));
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         b.addMouseListener(new MouseAdapter(){
             @Override public void mouseEntered(MouseEvent e){b.setBackground(Palette.GRAY_200);}
@@ -247,18 +254,18 @@ public class UngDungClient extends JFrame {
     private JTextField textField(){ JTextField t=new JTextField(20); t.setFont(new Font("Segoe UI",Font.PLAIN,15)); t.setBorder(new CompoundBorder(new LineBorder(Palette.GRAY_300,1,true), new EmptyBorder(10,14,10,14))); return t; }
     private JPasswordField passField(){ JPasswordField t=new JPasswordField(20); t.setFont(new Font("Segoe UI",Font.PLAIN,15)); t.setBorder(new CompoundBorder(new LineBorder(Palette.GRAY_300,1,true), new EmptyBorder(10,14,10,14))); return t; }
 
-    /** Card wrapper có thanh gradient */
+    /** Card wrapper có thanh gradient mảnh, tinh tế */
     private JPanel cardWrapper(String title, String subtitle, JComponent inner) {
         JPanel wrap = new JPanel(new GridBagLayout()); wrap.setOpaque(false);
-        ShadowCard card = new ShadowCard(new BorderLayout(0,10), 14);
-        JLabel head = heading(title, subtitle); head.setBorder(new EmptyBorder(4,6,0,6));
+        ShadowCard card = new ShadowCard(new BorderLayout(0,10), 16);
+        JLabel head = heading(title, subtitle); head.setBorder(new EmptyBorder(6,10,0,10));
         JComponent bar = new JComponent(){
             @Override protected void paintComponent(Graphics g){
                 Graphics2D g2=(Graphics2D)g;
                 g2.setPaint(new GradientPaint(0,0,Palette.VIOLET,getWidth(),0,Palette.CYAN));
-                g2.fillRoundRect(10,0,getWidth()-20,getHeight(),8,8);
+                g2.fillRoundRect(12,0,getWidth()-24,getHeight(),10,10);
             }
-            @Override public Dimension getPreferredSize(){return new Dimension(10,8);}
+            @Override public Dimension getPreferredSize(){return new Dimension(10,6);}
         };
         JPanel headWrap=new JPanel(new BorderLayout()); headWrap.setOpaque(false);
         headWrap.add(head,BorderLayout.NORTH); headWrap.add(bar,BorderLayout.CENTER);
@@ -283,7 +290,7 @@ public class UngDungClient extends JFrame {
         table.setDefaultRenderer(Object.class,(tbl,val,isSel,hasFocus,row,col)->{
             Component c=base.getTableCellRendererComponent(tbl,val,isSel,hasFocus,row,col);
             if(c instanceof JComponent jc){
-                jc.setBackground(isSel?new Color(0xDBEAFE):(row%2==0?Color.WHITE:Palette.GRAY_50));
+                jc.setBackground(isSel?new Color(0xFCE7F3):(row%2==0?Color.WHITE:Palette.GRAY_50));
                 jc.setBorder(new MatteBorder(0,0,1,0, Palette.GRAY_100));
             }
             return c;
@@ -291,7 +298,7 @@ public class UngDungClient extends JFrame {
     }
 
     /* ================== INPUT COMPONENTS ================== */
-
+    // == IconTextField: KHÔNG icon/emoji nếu leadingEmoji null/blank ==
     class IconTextField extends JPanel {
         final JTextField field = new JTextField();
         private final Color borderNor = Palette.GRAY_300;
@@ -300,10 +307,6 @@ public class UngDungClient extends JFrame {
             super(new BorderLayout(8,0));
             setOpaque(false);
             setBorder(new EmptyBorder(2,2,2,2));
-
-            JLabel ico = new JLabel(leadingEmoji);
-            ico.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 18));
-            ico.setForeground(Palette.TEXT_MUTED);
 
             field.setBorder(null);
             field.setOpaque(false);
@@ -325,7 +328,15 @@ public class UngDungClient extends JFrame {
             };
             inner.setOpaque(false);
             inner.setBorder(new EmptyBorder(10,12,10,12));
-            inner.add(ico, BorderLayout.WEST);
+
+            // Chỉ add icon khi có emoji hợp lệ (ở đây mình sẽ KHÔNG truyền emoji)
+            if (leadingEmoji != null && !leadingEmoji.isBlank()) {
+                JLabel ico = new JLabel(leadingEmoji);
+                ico.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 18));
+                ico.setForeground(Palette.TEXT_MUTED);
+                inner.add(ico, BorderLayout.WEST);
+            }
+
             inner.add(field, BorderLayout.CENTER);
             add(inner, BorderLayout.CENTER);
 
@@ -339,7 +350,7 @@ public class UngDungClient extends JFrame {
         void setText(String s){ field.setText(s); }
     }
 
-    /** Ô mật khẩu có 👁/🙈 — đã fix echoChar */
+    // == IconPasswordField: KHÔNG icon/emoji; nút mắt dùng text "Hiện/Ẩn" ==
     class IconPasswordField extends JPanel {
         final JPasswordField field = new JPasswordField();
         private boolean visible=false;
@@ -354,16 +365,13 @@ public class UngDungClient extends JFrame {
 
             echoDefault = field.getEchoChar()==0 ? '•' : field.getEchoChar();
 
-            JLabel ico = new JLabel(leadingEmoji);
-            ico.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 18));
-            ico.setForeground(Palette.TEXT_MUTED);
-
             field.setBorder(null);
             field.setOpaque(false);
             field.setFont(new Font("Segoe UI", Font.PLAIN, 15));
             field.putClientProperty("JTextField.placeholderText", placeholder);
 
-            JButton eye = new JButton("👁");
+            // Nút Hiện/Ẩn dạng text (không emoji)
+            JButton eye = new JButton("Hiện");
             eye.setBorder(new EmptyBorder(0,6,0,6));
             eye.setContentAreaFilled(false);
             eye.setFocusPainted(false);
@@ -371,7 +379,7 @@ public class UngDungClient extends JFrame {
             eye.addActionListener(e -> {
                 visible = !visible;
                 field.setEchoChar(visible ? (char)0 : echoDefault);
-                eye.setText(visible ? "🙈" : "👁");
+                eye.setText(visible ? "Ẩn" : "Hiện");
             });
 
             JPanel inner = new JPanel(new BorderLayout(8,0)) {
@@ -389,7 +397,9 @@ public class UngDungClient extends JFrame {
             };
             inner.setOpaque(false);
             inner.setBorder(new EmptyBorder(10,12,10,12));
-            inner.add(ico, BorderLayout.WEST);
+
+            // KHÔNG thêm icon phía trái (dù có truyền leadingEmoji cũng bỏ qua)
+            // (Nếu muốn bật lại thì add JLabel như IconTextField ở trên)
             inner.add(field, BorderLayout.CENTER);
             inner.add(eye, BorderLayout.EAST);
             add(inner, BorderLayout.CENTER);
@@ -420,7 +430,7 @@ public class UngDungClient extends JFrame {
         EmptyState(String big, String small) {
             setOpaque(false);
             setLayout(new GridBagLayout());
-            JLabel a = new JLabel("🕊", SwingConstants.CENTER);
+            JLabel a = new JLabel("🕊", SwingConstants.CENTER); // giữ nguyên; nếu không hiển thị được báo mình bỏ luôn
             a.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 42));
             JLabel b = new JLabel("<html><b style='font-size:15px;color:#31111D'>"+big+
                     "</b><br><span style='color:#6B5B6E'>"+small+"</span></html>");
@@ -454,12 +464,11 @@ public class UngDungClient extends JFrame {
 
         @Override protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
-            float alpha = 0.5f + 0.5f*(float)Math.sin(phase * Math.PI * 2); // 0..1
+            float alpha = 0.5f + 0.5f*(float)Math.sin(phase * Math.PI * 2);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.85f));
             super.paintComponent(g2);
-            // vẽ “✨” nhấp nháy lấp lánh quanh text
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.35f * alpha));
-            g2.setColor(Palette.CYAN); // hồng sáng
+            g2.setColor(Palette.CYAN);
             int w = getWidth(), h = getHeight();
             int r = Math.min(w, h) / 6;
             int cx = w/2, cy = h/2;
@@ -503,8 +512,9 @@ public class UngDungClient extends JFrame {
     }
 
     class DangNhapPanel extends JPanel {
-        private final IconTextField     tfUser = new IconTextField("Tên đăng nhập", "");
-        private final IconPasswordField tfPass = new IconPasswordField("Mật khẩu", "");
+        // KHÔNG icon/emoji
+        private final IconTextField     tfUser = new IconTextField("Tên đăng nhập", null);
+        private final IconPasswordField tfPass = new IconPasswordField("Mật khẩu", null);
 
         private final JButton btnLogin       = pill("Đăng nhập", Palette.GREEN);
         private final JButton btnToRegister  = ghost("Đăng ký");
@@ -702,9 +712,10 @@ public class UngDungClient extends JFrame {
             dlg.setLayout(new BorderLayout(10,10));
             dlg.getContentPane().setBackground(Color.WHITE);
 
-            IconPasswordField txtOld = new IconPasswordField("Mật khẩu cũ", "🔑");
-            IconPasswordField txtNew = new IconPasswordField("Mật khẩu mới", "🔒");
-            IconPasswordField txtRe  = new IconPasswordField("Nhập lại", "✏");
+            // KHÔNG icon/emoji trong dialog
+            IconPasswordField txtOld = new IconPasswordField("Mật khẩu cũ", null);
+            IconPasswordField txtNew = new IconPasswordField("Mật khẩu mới", null);
+            IconPasswordField txtRe  = new IconPasswordField("Nhập lại", null);
 
             JPanel form = new JPanel(new GridBagLayout());
             form.setOpaque(false);
@@ -746,25 +757,27 @@ public class UngDungClient extends JFrame {
     }
 
     private JPanel cardWhite(JComponent c){
-        ShadowCard sc=new ShadowCard(new BorderLayout(), 14); sc.setOpaque(false);
+        ShadowCard sc=new ShadowCard(new BorderLayout(), 16); sc.setOpaque(false);
         JPanel inner=new JPanel(new BorderLayout()); inner.setOpaque(false); inner.add(c,BorderLayout.CENTER);
         sc.add(inner,BorderLayout.CENTER); return sc;
     }
 
     /** ================== GAME PANEL (Emoji + Home/ESC) ================== */
     class GamePanel extends JPanel {
-        private final JLabel lblMe  = new JLabel("Bạn: ?", SwingConstants.LEFT);
-        private final JLabel lblOpp = new JLabel("Đối thủ: ?", SwingConstants.RIGHT);
+        private final JLabel lblMe  = new JLabel(" Bạn: ?", SwingConstants.LEFT);
+        private final JLabel lblOpp = new JLabel("? :Đối thủ ", SwingConstants.RIGHT);
 
         private final JLabel lblMyMove  = new JLabel("❓", SwingConstants.CENTER);
         private final BlinkLabel lblResult  = new BlinkLabel("Chưa chơi", Font.BOLD, 26);
         private final JLabel lblOppMove = new JLabel("❓", SwingConstants.CENTER);
 
-        private final JButton btnRock     = pill("ĐÁ",  Palette.BLUE);
-        private final JButton btnPaper    = pill("BAO", Palette.GREEN);
-        private final JButton btnScissors = pill("KÉO", Palette.ORANGE);
-        private final JButton btnLeave    = pill("🚪 Thoát phòng", Palette.RED);
-        private final JButton btnHome     = ghost("⬅  Về Trang chủ");
+        // ✅ Đổi hiển thị & thứ tự: KÉO – BÚA – BAO
+        private final JButton btnScissors = pill("KÉO", Palette.ORANGE); // gửi SCISSORS
+        private final JButton btnRock     = pill("BÚA", Palette.BLUE);   // gửi ROCK
+        private final JButton btnPaper    = pill("BAO", Palette.GREEN);  // gửi PAPER
+
+        private final JButton btnLeave    = pill("Thoát phòng", Palette.RED);
+        private final JButton btnHome     = ghost(" Về Trang chủ");
 
         GamePanel() {
             setOpaque(false);
@@ -787,11 +800,13 @@ public class UngDungClient extends JFrame {
             mid.add(cardWhite(lblOppMove));
             inner.add(mid, BorderLayout.CENTER);
 
-            // South: trái = Home, giữa = Đá/Bao/Kéo, phải = Thoát
+            // South: trái = Home, giữa = KÉO/BÚA/BAO, phải = Thoát
             JPanel south = new JPanel(new BorderLayout()); south.setOpaque(false);
             JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT,10,0)); left.setOpaque(false); left.add(btnHome);
             JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER,10,0)); center.setOpaque(false);
-            center.add(btnRock); center.add(btnPaper); center.add(btnScissors);
+            center.add(btnScissors); // KÉO
+            center.add(btnRock);     // BÚA
+            center.add(btnPaper);    // BAO
             JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,0)); right.setOpaque(false); right.add(btnLeave);
             south.add(left, BorderLayout.WEST);
             south.add(center, BorderLayout.CENTER);
@@ -802,11 +817,11 @@ public class UngDungClient extends JFrame {
             add(cardWrapper("Chơi – Oẳn Tù Tì", "Chọn nước đi của bạn và chờ đối thủ!", inner), BorderLayout.CENTER);
 
             // ==== LISTENERS ====
-            btnRock.addActionListener(e -> sendMoveUI("ROCK", "✊"));
-            btnPaper.addActionListener(e -> sendMoveUI("PAPER", "✋"));
-            btnScissors.addActionListener(e -> sendMoveUI("SCISSORS", "✌"));
+            btnScissors.addActionListener(e -> sendMoveUI("SCISSORS", "✌")); // KÉO
+            btnRock.addActionListener(e     -> sendMoveUI("ROCK",     "✊")); // BÚA
+            btnPaper.addActionListener(e    -> sendMoveUI("PAPER",    "✋")); // BAO
 
-            // Thoát phòng → gọi server (nếu có) rồi về trang chủ ngay
+            // Thoát phòng
             btnLeave.addActionListener(e -> {
                 try { connection.sendLeave(); } catch (Exception ignored) {}
                 resetRoundUI();
@@ -835,8 +850,8 @@ public class UngDungClient extends JFrame {
         }
 
         void setNames(String me, String opp) {
-            lblMe.setText("Bạn: " + (me==null?"?":me));
-            lblOpp.setText("Đối thủ: " + (opp==null?"?":opp));
+            lblMe.setText(" Bạn: " + (me==null?"?":me));
+            lblOpp.setText((opp==null?"?":opp) + " :Đối thủ ");
         }
 
         void resetRoundUI() {
@@ -876,9 +891,9 @@ public class UngDungClient extends JFrame {
         private String toEmoji(String m) {
             if (m == null) return "❓";
             String u = m.toUpperCase();
-            if (u.contains("ROCK") || u.contains("ĐÁ"))  return "✊";
-            if (u.contains("PAPER")|| u.contains("BAO")) return "✋";
-            if (u.contains("SCISS")|| u.contains("KÉO")) return "✌";
+            if (u.contains("SCISS") || u.contains("KÉO"))  return "✌"; // KÉO
+            if (u.contains("ROCK")  || u.contains("BÚA"))  return "✊"; // BÚA
+            if (u.contains("PAPER") || u.contains("BAO"))  return "✋"; // BAO
             return "❓";
         }
     }
@@ -1000,10 +1015,11 @@ public class UngDungClient extends JFrame {
                 l.setBorder(new EmptyBorder(6,8,6,8));
                 l.setForeground(Palette.TEXT_PRIMARY);
 
+                // ❌ Bỏ emoji huy chương — chỉ hiển thị số hạng (đậm, canh giữa)
                 if (col==0) {
                     int rank = Integer.parseInt(String.valueOf(getValueAt(row, 0)));
-                    String medal = switch (rank) { case 1 -> ""; case 2 -> ""; case 3 -> ""; default -> " "; };
-                    l.setText(medal + "  " + rank);
+                    l.setText(String.valueOf(rank));
+                    l.setHorizontalAlignment(SwingConstants.CENTER);
                     l.setFont(l.getFont().deriveFont(Font.BOLD));
                 }
                 return c;
