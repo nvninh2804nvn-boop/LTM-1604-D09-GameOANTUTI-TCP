@@ -8,9 +8,9 @@
 </h2>
 <div align="center">
     <p align="center">
-        <img src="LTM/src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
-        <img src="LTM/src/assets/fitdnu_logo.png" alt="FIT DNU Logo" width="180"/>
-        <img src="LTM/src/assets/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
+        <img src="src/assets/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
+        <img src="src/assets/fitdnu_logo.png" alt="FIT DNU Logo" width="180"/>
+        <img src="src/assets/dnu_logo.png" alt="DaiNam University Logo" width="200"/>
     </p>
 
 [![AIoTLab](https://img.shields.io/badge/AIoTLab-green?style=for-the-badge)](https://www.facebook.com/DNUAIoTLab)
@@ -19,12 +19,14 @@
 
 </div>
 
+---
+
 ## 📖 1. Giới thiệu hệ thống
-Ứng dụng Oẳn Tù Tì qua mạng (TCP Socket) được xây dựng nhằm mô phỏng trò chơi quen thuộc, cho phép người chơi thi đấu trực tuyến qua LAN hoặc Internet.
+Ứng dụng **Oẳn Tù Tì qua mạng (TCP Socket)** được xây dựng nhằm mô phỏng trò chơi quen thuộc, cho phép người chơi thi đấu trực tuyến qua LAN hoặc Internet.
 
 ### 🔹 Hệ thống hỗ trợ:
 - Tạo phòng chơi hoặc tham gia phòng theo mã / ngẫu nhiên.  
-- Thực hiện chọn ✊ Kéo / ✋ Bao / ✌ Búa và trả về kết quả tức thì.  
+- Thực hiện chọn ✊ Đá / ✋ Bao / ✌ Kéo và trả về kết quả tức thì.  
 - Đảm bảo tính ổn định – uy tín – công bằng.  
 
 ### 🎯 Mục tiêu chính:
@@ -34,7 +36,12 @@
 
 ---
 
-## 🛠️ 2. Công nghệ sử dụng [![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)[![TCP Socket](https://img.shields.io/badge/TCP--Socket-008080?style=for-the-badge)](#)[![Java Swing](https://img.shields.io/badge/Java%20Swing-6DB33F?style=for-the-badge)](#)[![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white)](#)
+## 🛠️ 2. Công nghệ sử dụng
+[![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)
+[![TCP Socket](https://img.shields.io/badge/TCP--Socket-008080?style=for-the-badge)](#)
+[![Java Swing](https://img.shields.io/badge/Java%20Swing-6DB33F?style=for-the-badge)](#)
+[![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white)](#)
+
 - Ngôn ngữ lập trình: Java  
 - Giao tiếp mạng: TCP Socket (`ServerSocket`, `Socket`, `I/O Streams`)  
 - Mô hình kiến trúc: Client–Server  
@@ -50,7 +57,7 @@
 
 ### 📝 Đăng ký
 <p align="center">
-  <img src="LTM/src/assets/Dangki.png.png" alt="Register UI" width="500"/>
+  <img src="src/assets/Dangki.png.png" alt="Register UI" width="500"/>
   <br>
   <em>Màn hình đăng ký – tạo tài khoản mới để tham gia hệ thống.</em>
 </p>
@@ -59,7 +66,7 @@
 
 ### 🔑 Đăng nhập
 <p align="center">
-  <img src="LTM/src/assets/Dangnhap.png.png" alt="Login UI" width="500"/>
+  <img src="src/assets/Dangnhap.png.png" alt="Login UI" width="500"/>
   <br>
   <em>Màn hình đăng nhập – người chơi nhập tài khoản và mật khẩu để vào hệ thống.</em>
 </p>
@@ -68,7 +75,7 @@
 
 ### 🏠 Trang chủ
 <p align="center">
-  <img src="LTM/src/assets/trangchu.png.png" alt="Home UI" width="500"/>
+  <img src="src/assets/trangchu.png.png" alt="Home UI" width="500"/>
   <br>
   <em>Màn hình trang chủ – hiển thị danh sách người chơi online, mời đấu hoặc ghép ngẫu nhiên.</em>
 </p>
@@ -77,7 +84,7 @@
 
 ### 🎮 Chơi game
 <p align="center">
-  <img src="LTM/src/assets/choi.png.png" alt="Game UI" width="500"/>
+  <img src="src/assets/choi.png.png" alt="Game UI" width="500"/>
   <br>
   <em>Màn hình chơi game – chọn ✊ Đá / ✋ Bao / ✌ Kéo để thi đấu trực tuyến với đối thủ.</em>
 </p>
@@ -86,7 +93,7 @@
 
 ### 🏆 Bảng xếp hạng
 <p align="center">
-  <img src="LTM/src/assets/top.png.png" alt="Leaderboard UI" width="500"/>
+  <img src="src/assets/top.png.png" alt="Leaderboard UI" width="500"/>
   <br>
   <em>Màn hình bảng xếp hạng – thống kê thành tích, xếp hạng người chơi theo số trận thắng.</em>
 </p>
@@ -95,34 +102,26 @@
 
 ### 📂 Lịch sử
 <p align="center">
-  <img src="LTM/src/assets/Lichsu.png.png" alt="History UI" width="500"/>
+  <img src="src/assets/Lichsu.png.png" alt="History UI" width="500"/>
   <br>
   <em>Màn hình lịch sử – hiển thị kết quả các trận đã chơi: đối thủ, kết quả, thời gian.</em>
 </p>
 
+---
 
-> ## ⚙️ 4. Cài đặt
-> 1. Cài đặt **JDK 17+ hoặc JDK 21**  
-> 2. Cài **IDE** (Eclipse / IntelliJ / NetBeans)  
-> 3. Clone project:
->    ```bash
->    git clone https://github.com/nvninh2804nvn-boop/LTM-1604-D09-Game-TCP.git
->    cd LTM-1604-D09-Game-TCP
->    ```
-> 4. Chạy chương trình:
->    - **Server**: `LTM/src/may_chu/AppServer.java`  
->    - **Client**: `LTM/src/nguoi_choi/ClientApp.java` (mở 2 client để test)  
+### 🔒 Đổi mật khẩu
+<p align="center">
+  <img src="src/assets/doimatkhau.png.png" alt="Change Password UI" width="500"/>
+  <br>
+  <em>Màn hình đổi mật khẩu – người chơi thay đổi mật khẩu tài khoản của mình.</em>
+</p>
 
 ---
 
-## 📬 5. Liên hệ  
-
-> 👤 **Họ và tên**: Nguyễn Việt Ninh  
-> 🎓 **Khoa**: Công nghệ thông tin –  Trường Đại học Đại Nam   
-> 🌐 [Website Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
-> 📧 **Email**: nvninh2804.nvn@gmail.com  
-> 📱 **Fanpage**: AIoTLab – FIT DNU  
->
-> <p align="center">
-> © 2025 AIoTLab, Faculty of Information Technology, DaiNam University. All rights reserved  
-> </p>  
+## ⚙️ 4. Cài đặt
+1. Cài đặt **JDK 17+ hoặc JDK 21**  
+2. Cài **IDE** (Eclipse / IntelliJ / NetBeans)  
+3. Clone project:
+   ```bash
+   git clone https://github.com/nvninh2804nvn-boop/LTM-1604-D09-Game-TCP.git
+   cd LTM-1604-D09-Game-TCP
