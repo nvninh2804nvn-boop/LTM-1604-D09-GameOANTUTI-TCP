@@ -85,7 +85,7 @@
 
 ### 🏆 Bảng xếp hạng
 <p align="center">
-  <img src="LTM/src/assets/toptop.png.png" alt="Leaderboard UI" width="500"/>
+  <img src="LTM/src/assets/top.png.png" alt="Leaderboard UI" width="500"/>
 </p>
 
 ---
