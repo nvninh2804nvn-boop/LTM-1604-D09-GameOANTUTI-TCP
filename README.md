@@ -40,18 +40,18 @@
 
 ## 🛠️ 2. Công nghệ sử dụng
 
-[![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)  
-[![TCP Socket](https://img.shields.io/badge/TCP--Socket-008080?style=for-the-badge)](#)  
-[![Swing](https://img.shields.io/badge/Java%20Swing-6DB33F?style=for-the-badge)](#)  
-[![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white)](#)  
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TCP--Socket-008080?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Java%20Swing-6DB33F?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white"/>
+</p>
 
 - **Ngôn ngữ:** Java  
 - **Mạng:** TCP Socket (`ServerSocket`, `Socket`, `I/O Streams`)  
 - **Giao diện:** Java Swing (FlatLaf theme)  
 - **Quản lý dự án:** Maven / Gradle (tùy chọn)  
-- **IDE:** Eclipse, IntelliJ IDEA, hoặc NetBeans  
-
----
+- **IDE:** Eclipse, IntelliJ IDEA, NetBeans  
 
 ## 🖼️ 3. Giao diện hệ thống
 
@@ -113,11 +113,11 @@ Client: LTM/src/nguoi_choi/UngDungClient.java (mở 2 client để test)
 
 ## 📬 5. Liên hệ
 
-- 👤 **Họ và tên:** Nguyễn Việt Ninh  
-- 🎓 **Khoa:** Công nghệ thông tin – Trường Đại học Đại Nam  
-- 🌐 **Website:** [Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
-- 📧 **Email:** [nvninh2804@gmail.com](mailto:nvninh2804@gmail.com)  
-- 📱 **Fanpage:** [AIoTLab – FIT DNU](https://www.facebook.com/DNUAIoTLab)  
+ 👤 **Họ và tên:** Nguyễn Việt Ninh  
+ 🎓 **Khoa:** Công nghệ thông tin – Trường Đại học Đại Nam  
+ 🌐 **Website:** [Khoa CNTT – DNU](https://dainam.edu.vn/vi/khoa-cong-nghe-thong-tin)  
+ 📧 **Email:** [nvninh2804@gmail.com](mailto:nvninh2804@gmail.com)  
+ 📱 **Fanpage:** [AIoTLab – FIT DNU](https://www.facebook.com/DNUAIoTLab)  
 
 ---
 
